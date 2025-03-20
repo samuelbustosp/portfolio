@@ -9,10 +9,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <Navbar/>
-        <Sidebar/>
-        {children}
+      <body className="flex">
+        <main className="flex-1 flex flex-col">
+          <Navbar />
+          <div className="flex gap-3">
+            <Sidebar />
+            {children}
+          </div>
+        </main>
       </body>
     </html>
   );

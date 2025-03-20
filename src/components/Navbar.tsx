@@ -6,8 +6,6 @@ import { RxAvatar } from "react-icons/rx";
 import { TbFolderSearch } from "react-icons/tb";
 import { ChevronRight, ChevronLeft } from 'lucide-react';
 
-
-
 const Navbar: React.FC = () => {
     return ( 
         <nav className="p-2 ">

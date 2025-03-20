@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Menu, X, Home, Settings, User, Library } from "lucide-react";
+import { X, Home, Settings, User, Library } from "lucide-react";
 
-const Sidebar = () => {
+const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true); // Inicia expandido
 
   return (
     <motion.div
       animate={{ width: isOpen ? "250px" : "70px" }}
       transition={{ duration: 0.3 }}
-      className="fixed top-16 left-2 h-[calc(100%-4rem)] bg-zinc-900 text-white shadow-lg flex flex-col z-50 p-2 rounded-lg"
+      className="min-h-screen bg-zinc-900 ml-2 text-white shadow-lg flex flex-col z-50 p-2 rounded-lg"
     >
       {/* Botón de abrir/cerrar dentro del Sidebar */}
       <button
