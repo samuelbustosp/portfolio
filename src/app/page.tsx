@@ -1,6 +1,12 @@
+'use client';
+
+import SkillFilter from "@/components/skill/SkillFilter";
+import SkillList from "@/components/skill/SkillList";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
+  const [selectedCategory, setSelectedCategory] = useState("All");
   return (
     <main className="p-4 bg-zinc-900 rounded-lg w-full mr-3">
       <section className="bg-gradient-to-tr from-zinc-950 via-zinc-950 to-zinc-900 p-6 rounded-lg flex">
@@ -20,6 +26,10 @@ export default function Home() {
             <br/>complejos y explorar nuevas tecnologías.</p>
         </div>
         
+      </section>
+      <section>
+        <SkillFilter selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
+        <SkillList selectedCategory={selectedCategory}/>
       </section>
     </main>
   );
