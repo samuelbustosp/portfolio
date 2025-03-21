@@ -1,5 +1,6 @@
 'use client';
 
+import ProjectList from "@/components/project/ProjectList";
 import SkillFilter from "@/components/skill/SkillFilter";
 import SkillList from "@/components/skill/SkillList";
 import Image from "next/image";
@@ -9,7 +10,7 @@ export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   return (
     <main className="p-4 bg-zinc-900 rounded-lg w-full mr-3">
-      <section className="bg-gradient-to-tr from-zinc-950 via-zinc-950 to-zinc-900 p-6 rounded-lg flex">
+      <section className="bg-gradient-to-tr from-zinc-950 to-zinc-900 p-6 rounded-lg flex">
         <Image
           src="/images/perfil.jpg"
           alt="Descripción de la imagen"
@@ -30,6 +31,10 @@ export default function Home() {
       <section>
         <SkillFilter selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
         <SkillList selectedCategory={selectedCategory}/>
+      </section>
+      <section>
+        <h1 className="p-2 text-2xl font-bold">¡Proyectos!</h1>
+        <ProjectList/>
       </section>
     </main>
   );
