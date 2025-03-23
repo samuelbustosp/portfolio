@@ -4,9 +4,10 @@ interface Project{
     name: string;
     img: string;
     desc: string;
+    stack: string;
 }
 
-const Project = ({name, img, desc}: Project) => {
+const Project = ({name, img, desc, stack}: Project) => {
     return (
         <article className="max-w-md bg-zinc-800/80 border border-zinc-700 rounded-lg overflow-hidden shadow-lg p-4">
           {img && (
@@ -18,13 +19,16 @@ const Project = ({name, img, desc}: Project) => {
               />
             </figure>
           )}
-          <header className="py-2">
-            <h2 className="text-2xl font-bold tracking-tight text-white">
+          <header >
+            <h2 className="text-2xl tracking-tight text-white mt-2">
               {name}
             </h2>
           </header>
-          <p className="text-gray-400 text-sm leading-relaxed">
+          <p className="text-zinc-300 font-light">
             {desc}
+          </p>
+          <p className="text-zinc-400 text-xs font-light">
+            {stack}
           </p>
         </article>
       );
