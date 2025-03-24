@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { X, Home, Settings, User, Library } from "lucide-react";
+import { FaBolt, FaPlug, FaUser } from "react-icons/fa";
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true); // Inicia expandido
@@ -10,13 +11,13 @@ const Sidebar: React.FC = () => {
   return (
     <motion.div
       animate={{ width: isOpen ? "250px" : "70px" }}
-      transition={{ duration: 0.3 }}
-      className="min-h-screen bg-zinc-900 ml-2 text-white shadow-lg flex flex-col z-50 p-2 rounded-lg"
+      transition={{ duration: 0.2 }}
+      className="min-h-screen fixed top-16 bg-zinc-900 ml-2 text-white shadow-2xl flex flex-col z-50 p-2 rounded-lg"
     >
       {/* Botón de abrir/cerrar dentro del Sidebar */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="mb-6 p-2 bg-zinc-800 rounded-full hover:bg-zinc-700 transition self-center"
+        className="mb-6 p-2 bg-zinc-800 rounded-full cursor-pointer hover:bg-zinc-700 transition self-center"
       >
         {isOpen ? <X className="w-6 h-6" /> : <Library className="w-6 h-6" />}
       </button>
@@ -24,31 +25,31 @@ const Sidebar: React.FC = () => {
       {/* Menú de opciones */}
       <nav className="flex flex-col gap-4 w-full">
         <a
-          href="#"
-          className={`flex items-center p-3 rounded-md hover:bg-zinc-800 transition ${
-            isOpen ? "justify-start gap-3" : "justify-center"
+          href="#about"
+          className={`flex items-center m-0.5 p-3 rounded-md  hover:bg-zinc-800 transition ${
+            isOpen ? "justify-start gap-3 " : "justify-center bg-gradient-to-br from-indigo-600 to-indigo-50"
           }`}
         >
-          <Home className="w-6 h-6" />
-          {isOpen && <span className="text-lg">Inicio</span>}
+          <FaUser className="w-4 h-6" />
+          {isOpen && <span className="text-lg">Sobre Mí</span>}
         </a>
         <a
-          href="#"
-          className={`flex items-center p-3 rounded-md hover:bg-zinc-800 transition ${
-            isOpen ? "justify-start gap-3" : "justify-center"
+          href="#skills"
+          className={`flex items-center m-0.5 p-3 rounded-md hover:bg-zinc-800 transition ${
+            isOpen ? "justify-start gap-3 " : "justify-center bg-emerald-800 text-green-500"
           }`}
         >
-          <User className="w-6 h-6" />
-          {isOpen && <span className="text-lg">Perfil</span>}
+          <FaBolt className="w-4 h-6" />
+          {isOpen && <span className="text-lg">Habilidades</span>}
         </a>
         <a
-          href="#"
-          className={`flex items-center p-3 rounded-md hover:bg-zinc-800 transition ${
-            isOpen ? "justify-start gap-3" : "justify-center"
+          href="#powered"
+          className={`flex items-center m-0.5 p-3 rounded-md hover:bg-zinc-800  transition ${
+            isOpen ? "justify-start gap-3" : "justify-center bg-yellow-500 hover:text-yellow-500"
           }`}
         >
-          <Settings className="w-6 h-6" />
-          {isOpen && <span className="text-lg">Configuración</span>}
+          <FaPlug className="w-4 h-6" />
+          {isOpen && <span className="text-lg">Powred By</span>}
         </a>
       </nav>
     </motion.div>

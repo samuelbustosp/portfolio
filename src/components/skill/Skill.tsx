@@ -40,7 +40,7 @@ const Skill = ({ name, icon,category }: Skill) => {
                 <div className='flex items-center justify-center h-full'>
                     <span className="text-4xl text-white">{icon}</span> 
                 </div>
-                <div className={`text-white leading-3 py-0.5 opacity-30 rounded-lg bg-gray-300  inline-block`}></div>
+                
             </article>
             <div className='w-full ml-0'> {/* Eliminado margen izquierdo */}
                 <h3 className="font-bold font-spotify text-white text-left mt-1 text-md">{name}</h3> {/* Reducido el tamaño del texto */}

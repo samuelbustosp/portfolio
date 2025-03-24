@@ -57,6 +57,15 @@ body {
   font-family: 'CircularSpotify',Arial, Helvetica, sans-serif;
 }
 
+.dark-bg{
+  background-color: #0a0a0a;
+}
+
+html {
+  scroll-padding-top: 80px; /* Ajusta según la altura del navbar */
+  scroll-behavior: smooth;
+}
+
 
 
 

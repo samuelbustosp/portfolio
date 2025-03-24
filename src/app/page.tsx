@@ -9,12 +9,13 @@ import { MdVerified } from "react-icons/md";
 import { FaInstagram, FaLinkedin } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import Link from "next/link";
+import TechnologyList from "@/components/technology/TechnologyList"
 
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   return (
-    <main className="p-4 bg-zinc-900 rounded-lg w-full mr-3">
-      <section className="bg-gradient-to-tr from-zinc-950 to-zinc-900 p-6 rounded-lg flex">
+    <main className="p-4 ml-22 bg-zinc-900 rounded-lg w-full mr-3 mt-[64px]">
+      <section id="about" className="bg-gradient-to-tr from-zinc-950 to-zinc-900 p-6 rounded-lg flex">
         <Image
           src="/images/perfil.jpg"
           alt="Descripción de la imagen"
@@ -59,13 +60,17 @@ export default function Home() {
         </div>
         
       </section>
-      <section className="mb-12">
+      <section id="skills" className="mb-12">
         <SkillFilter selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
         <SkillList selectedCategory={selectedCategory}/>
       </section>
-      <section>
-        <h1 className="p-2 text-3xl font-bold">¡Proyectos!</h1>
+      <section id="projects" className="mb-12">
+        <h1 className="p-2 text-3xl font-bold ">¡Proyectos!</h1>
         <ProjectList/>
+      </section>
+      <section id="powered">
+        <h2 className="p-2 text-3xl font-bold">¡Powered By!</h2>
+        <TechnologyList/>
       </section>
     </main>
   );

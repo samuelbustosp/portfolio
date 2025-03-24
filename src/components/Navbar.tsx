@@ -8,7 +8,7 @@ import { ChevronRight, ChevronLeft } from 'lucide-react';
 
 const Navbar: React.FC = () => {
     return ( 
-        <nav className="p-2">
+        <nav className="p-2 fixed top-0 left-0 w-full z-50 dark-bg">
             <ul className="flex items-center gap-4 justify-between">
                 <li className="flex items-center">
                     <ChevronLeft className="w-8 h-8"/>

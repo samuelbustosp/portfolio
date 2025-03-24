@@ -24,7 +24,7 @@ const ProjectList = () => {
 
     return (
         <div className='relative w-full overflow-hidden p-2'>
-            <div className='flex gap-6 transition-transform' style={{ transform: `translateX(-${index * (120 / visibleProjects)}%)` }}>
+            <div className='flex gap-6 transition-transform' style={{ transform: `translateX(-${index * (118 / visibleProjects)}%)` }}>
                 {projects.map((proj, i) => (
                     <div key={i} className='w-1/3 flex-shrink-0'>
                         <Project name={proj.name} img={proj.img} desc={proj.desc} stack={proj.stack} />
