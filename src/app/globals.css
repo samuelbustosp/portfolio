@@ -67,5 +67,41 @@ html {
 }
 
 
+/* Estilo de la pelotita */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff; /* Color blanco */
+  cursor: pointer;
+  transition: background 0.3s ease; /* Para cambio de color al hacer hover */
+}
+
+/* Estilo cuando el input está en hover (cambia el color de la pelotita en hover) */
+.slider:hover::-webkit-slider-thumb {
+  background: #ccc; /* Cambia el color de la pelotita en hover */
+}
+
+/* Para Firefox */
+.slider::-moz-range-track {
+  background: transparent; /* Fondo gris como valor predeterminado */
+  height: 8px;
+  border-radius: 10px;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff; /* Color blanco */
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.slider:hover::-moz-range-thumb {
+  background: #ccc; /* Cambia el color de la pelotita en hover */
+}
 
 
