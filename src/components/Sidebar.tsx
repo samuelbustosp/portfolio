@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { X, Home, Settings, User, Library } from "lucide-react";
+import { X, Library } from "lucide-react";
 import { FaBolt, FaPlug, FaUser } from "react-icons/fa";
 
 const Sidebar: React.FC = () => {

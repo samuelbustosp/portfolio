@@ -9,7 +9,7 @@ interface Skill{
     category: string
 }
 
-const Skill = ({ name, icon,category }: Skill) => {
+const Skill = ({ name, icon}: Skill) => {
     const [isHovered, setIsHovered] = useState(false); 
 
     const getCategoryBackground = (name: string) => {

@@ -1,4 +1,4 @@
-import { RiGithubFill, RiTailwindCssFill, RiVercelFill } from "react-icons/ri";
+import {  RiTailwindCssFill, RiVercelFill } from "react-icons/ri";
 import { SiTypescript, SiNextdotjs } from "react-icons/si";
 
 export const technologies = [

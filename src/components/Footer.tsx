@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation"; // Hook para obtener el pathname
 import { sections } from "@/data/section"; // Las secciones y sus íconos
 import { IoMdPlayCircle, IoMdVolumeHigh } from "react-icons/io";
-import { IoPlaySkipBack, IoPlaySkipBackSharp, IoPlaySkipForward, IoRepeat, IoShuffle, IoVolumeHigh } from "react-icons/io5";
+import { IoPlaySkipBack, IoPlaySkipForward, IoRepeat, IoShuffle } from "react-icons/io5";
 import { MdDevices } from "react-icons/md";
 
 const Footer = () => {
