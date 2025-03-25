@@ -3,6 +3,8 @@ import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -10,6 +12,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>Portfolio - BPS</title> 
+        <link rel="icon" href="/favicon.ico" />
+      </head>
       <body className="flex">
         <main className="flex-1 flex flex-col">
           <Navbar />
