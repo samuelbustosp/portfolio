@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
+import Footer from "@/components/Footer";
 
 export default function RootLayout({
   children,
@@ -15,7 +16,9 @@ export default function RootLayout({
           <div className="flex gap-3">
             <Sidebar />
             {children}
+            
           </div>
+          <Footer/>
         </main>
       </body>
     </html>

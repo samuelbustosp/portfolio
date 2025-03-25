@@ -14,7 +14,7 @@ import TechnologyList from "@/components/technology/TechnologyList"
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   return (
-    <main className="p-4 ml-22 bg-zinc-900 rounded-lg w-full mr-3 mt-[64px]">
+    <main className="p-4 ml-22 bg-zinc-900 rounded-lg w-full mr-3 mt-[64px] mb-[84px]">
       <section id="about" className="bg-gradient-to-tr from-zinc-950 to-zinc-900 p-6 rounded-lg flex">
         <Image
           src="/images/perfil.jpg"
@@ -68,7 +68,7 @@ export default function Home() {
         <h1 className="p-2 text-3xl font-bold ">¡Proyectos!</h1>
         <ProjectList/>
       </section>
-      <section id="powered">
+      <section id="powered" className="h-auto">
         <h2 className="p-2 text-3xl font-bold">¡Powered By!</h2>
         <TechnologyList/>
       </section>
