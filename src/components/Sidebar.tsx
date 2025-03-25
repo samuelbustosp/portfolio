@@ -12,7 +12,7 @@ const Sidebar: React.FC = () => {
     <motion.div
       animate={{ width: isOpen ? "250px" : "70px" }}
       transition={{ duration: 0.2 }}
-      className="fixed top-16 bottom-22 bg-zinc-900 ml-2 text-white shadow-2xl flex flex-col z-50 p-2 rounded-lg"
+      className="fixed top-16 bottom-23 bg-zinc-900 ml-2 text-white shadow-2xl flex flex-col z-50 p-2 rounded-lg"
     >
       {/* Botón de abrir/cerrar dentro del Sidebar */}
       <button

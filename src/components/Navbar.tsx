@@ -26,8 +26,10 @@ const Navbar: React.FC = () => {
                         <span className="text-2xl flex items-center gap-2 mr-2">|<TbFolderSearch/></span>
                     </li>
                 </div>
-                <li className="text-4xl">
-                    <RxAvatar/>
+                <li className="text-4xl mr-2">
+                    <img src="/images/perfil-bw.jpg"
+                        className="h-9 rounded-full"
+                    />
                 </li>
                 
                 

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"; // Hook para obtener el pathname
 import { sections } from "@/data/section"; // Las secciones y sus íconos
 import { IoMdPlayCircle, IoMdVolumeHigh } from "react-icons/io";
 import { IoPlaySkipBack, IoPlaySkipBackSharp, IoPlaySkipForward, IoRepeat, IoShuffle, IoVolumeHigh } from "react-icons/io5";
+import { MdDevices } from "react-icons/md";
 
 const Footer = () => {
   const pathname = usePathname(); // Obtiene el pathname actual
@@ -58,7 +59,7 @@ const Footer = () => {
         </div>
       
         {/* Contenedor central para los botones de reproducción */}
-        <div className="flex flex-col justify-center items-center gap-2.5 flex-grow cursor-pointer">
+        <div className="flex flex-col justify-center items-center gap-1.5 flex-grow cursor-pointer">
             <div className="flex gap-3 items-center">
                 <span className="text-zinc-300 text-2xl"><IoShuffle /></span>
                 <span className="text-zinc-300 text-2xl"><IoPlaySkipBack /></span>
@@ -66,28 +67,34 @@ const Footer = () => {
                 <span className="text-zinc-300 text-2xl"><IoPlaySkipForward /></span>
                 <span className="text-zinc-300 text-2xl"><IoRepeat /></span>
             </div>
-            <input
+            <div className="flex items-center gap-1">
+              <span className="text-xs font-light">{currentSection.time}</span>
+              <input
                 type="range"
                 min="0"
                 max="100"
                 value={currentSection.value}
                 className="slider w-96 h-1 rounded-2xl"
                 disabled
-            />
+              />
+              <span className="text-xs font-light">3:30</span>
+            </div>
+            
 
         </div>
 
         {/* Contenedor derecho para el volumen */}
-        <div className="flex items-center">
-            <span className="text-zinc-300 text-2xl"><IoMdVolumeHigh /></span>
-            <input
-                type="range"
-                min="0"
-                max="100"
-                value="50"
-                className="w-30 h-1 rounded-2xl cursor-pointer"
-                disabled
-            />
+        <div className="flex items-center ">
+          <span className="text-zinc-300 text-2xl mr-4"><MdDevices /></span>
+          <span className="text-zinc-300 text-2xl"><IoMdVolumeHigh /></span>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="50"
+            className="w-26 h-1 rounded-2xl cursor-pointer"
+            disabled
+          />
         </div>
     </footer>
   );
