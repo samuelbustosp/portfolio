@@ -11,7 +11,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <head>
         <title>Portfolio - BPS</title> 
         <link rel="icon" href="/favicon.ico" />
@@ -22,7 +22,6 @@ export default function RootLayout({
           <div className="flex gap-3">
             <Sidebar />
             {children}
-            
           </div>
           <Footer/>
         </main>

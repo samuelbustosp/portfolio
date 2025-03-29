@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { X, Library } from "lucide-react";
-import { FaBolt, FaPlug, FaUser } from "react-icons/fa";
+import { X, Library, Folders } from "lucide-react";
+import { FaBolt, FaFolder, FaFolderOpen, FaPlug, FaUser } from "react-icons/fa";
+import { IoFolderSharp } from "react-icons/io5";
 
 const Sidebar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false); // Inicia expandido
+  const [isOpen, setIsOpen] = useState(false); 
 
   return (
     <motion.div
@@ -47,6 +48,19 @@ const Sidebar: React.FC = () => {
           
           {isOpen && <span className="text-lg">Habilidades</span>}
         </a>
+        <a
+          href="#powered"
+          className={`flex items-center m-0.5  transition ${
+            isOpen ? "justify-start gap-3" : "justify-center "
+          }`}
+        >
+          <div className="bg-yellow-500  hover:text-yellow-500 py-3 px-4 rounded-lg hover:bg-zinc-800">
+            <FaFolder className="w-4 h-6" />
+          </div>
+          
+          {isOpen && <span className="text-lg">Powered By</span>}
+        </a>
+        
         <a
           href="#powered"
           className={`flex items-center m-0.5  transition ${
