@@ -49,16 +49,16 @@ const Sidebar: React.FC = () => {
           {isOpen && <span className="text-lg">Habilidades</span>}
         </a>
         <a
-          href="#powered"
+          href="#projects"
           className={`flex items-center m-0.5  transition ${
             isOpen ? "justify-start gap-3" : "justify-center "
           }`}
         >
-          <div className="bg-yellow-500  hover:text-yellow-500 py-3 px-4 rounded-lg hover:bg-zinc-800">
+          <div className="bg-violet-500 hover:text-violet-800 py-3 px-4 rounded-lg hover:bg-zinc-800">
             <FaFolder className="w-4 h-6" />
           </div>
           
-          {isOpen && <span className="text-lg">Powered By</span>}
+          {isOpen && <span className="text-lg">Proyectos</span>}
         </a>
         
         <a
