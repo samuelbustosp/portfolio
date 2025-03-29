@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { X, Library, Folders } from "lucide-react";
-import { FaBolt, FaFolder, FaFolderOpen, FaPlug, FaUser } from "react-icons/fa";
-import { IoFolderSharp } from "react-icons/io5";
+import { X, Library } from "lucide-react";
+import { FaBolt, FaFolder, FaPlug, FaUser } from "react-icons/fa";
+
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false); 

@@ -1,17 +1,17 @@
 'use client';
 
-import Link from "next/link";
 import { GoHomeFill, GoSearch } from "react-icons/go";
 import { TbFolderSearch } from "react-icons/tb";
 import { ChevronRight, ChevronLeft } from 'lucide-react';
 import { useState } from "react";
 import { sections } from "@/data/section";
+import Link from "next/link";
 
 const Navbar: React.FC = () => {
     const [search, setSearch] = useState("");
     const [isFocused, setIsFocused] = useState(false);
 
-    const filteredSections = Object.entries(sections).filter(([_, section]) =>
+    const filteredSections = Object.entries(sections).filter(([, section]) =>
         search
             ? section.name.toLowerCase().includes(search.toLowerCase()) // Filtra cuando hay búsqueda
             : isFocused // Si el input está enfocado y no hay búsqueda, muestra todo
@@ -31,9 +31,9 @@ const Navbar: React.FC = () => {
                 </li>
                 <div className="flex items-center gap-4">
                     <li className="bg-zinc-800 p-2 text-3xl rounded-full">
-                        <a href="/#" >
+                        <Link href="/#" >
                             <GoHomeFill/>
-                        </a>
+                        </Link>
                     </li>
                     <li className="bg-zinc-800 p-2 rounded-full flex items-center justify-center gap-3">
                         <span className="text-2xl"><GoSearch/></span>
