@@ -3,11 +3,10 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation"; // Hook para obtener el pathname
 import { sections } from "@/data/section"; // Las secciones y sus íconos
-import { IoMdPlayCircle, IoMdVolumeHigh, IoMdVolumeOff } from "react-icons/io";
+import { IoMdVolumeHigh, IoMdVolumeOff } from "react-icons/io";
 import { IoPlaySkipBack, IoPlaySkipForward, IoRepeat, IoShuffle } from "react-icons/io5";
 import { MdDevices } from "react-icons/md";
-import { span } from "framer-motion/client";
-import { FaPlayCircle, FaVolumeMute } from "react-icons/fa";
+import { FaPlayCircle } from "react-icons/fa";
 import { FaCirclePause } from "react-icons/fa6";
 
 const Footer = () => {
