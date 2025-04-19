@@ -31,9 +31,9 @@ const Navbar: React.FC = () => {
                 </li>
                 <div className="flex items-center gap-4">
                     <li className="bg-zinc-800 p-2 text-3xl rounded-full">
-                        <a href="/#" >
+                        <Link href="/#" >
                             <GoHomeFill/>
-                        </a>
+                        </Link>
                     </li>
                     <li className="bg-zinc-800 p-2 rounded-full flex items-center justify-center gap-3">
                         <span className="text-2xl"><GoSearch/></span>
