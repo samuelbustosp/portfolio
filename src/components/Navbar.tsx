@@ -2,7 +2,6 @@
 
 import { GoHomeFill, GoSearch } from "react-icons/go";
 import { TbFolderSearch } from "react-icons/tb";
-import { ChevronRight, ChevronLeft } from 'lucide-react';
 import { useState } from "react";
 import { sections } from "@/data/section";
 import Link from "next/link";
@@ -23,62 +22,68 @@ const Navbar: React.FC = () => {
     };
 
     return ( 
-        <nav className="p-2 fixed top-0 left-0 w-full z-50 dark-bg">
+        <nav className="p-2 fixed top-0 left-0 z-50 dark-bg w-full">
             <ul className="flex items-center gap-4 justify-between">
-                <li className="flex items-center">
-                    <ChevronLeft className="w-8 h-8"/>
-                    <ChevronRight className="w-8 h-8"/>
-                </li>
-                <div className="flex items-center gap-4">
-                    <li className="bg-zinc-800 p-2 text-3xl rounded-full">
-                        <Link href="/#" >
-                            <GoHomeFill/>
+                
+
+                {/* Sección central: Home + Search */}
+                <div className="flex items-center gap-4 sm:gap-6 flex-1 justify-center">
+                    <li className="bg-zinc-800 p-2 text-xl sm:text-2xl rounded-full">
+                        <Link href="/#">
+                            <GoHomeFill />
                         </Link>
                     </li>
-                    <li className="bg-zinc-800 p-2 rounded-full flex items-center justify-center gap-3">
-                        <span className="text-2xl"><GoSearch/></span>
+
+                    <li className="relative flex items-center bg-zinc-800 px-3 py-1 sm:px-4 sm:py-2 rounded-full gap-2 w-full max-w-sm">
+                        <GoSearch className="text-lg sm:text-xl text-gray-300" />
                         <input
                             type="text"
                             placeholder="¿Qué estás buscando?"
                             value={search}
-                            onChange={(e)=> setSearch(e.target.value)}
+                            onChange={(e) => setSearch(e.target.value)}
                             onFocus={() => setIsFocused(true)}
                             onBlur={() => setTimeout(() => setIsFocused(false), 200)}
-                            className="bg-transparent text-zinc-300 outline-none border-none"
+                            className="flex-1 bg-transparent text-sm sm:text-base text-zinc-100 placeholder-zinc-400 outline-none"
                         />
-                        <span className="text-2xl font-light flex items-center gap-2 mr-2">
+                        <span className="text-lg sm:text-xl font-light text-zinc-400 flex items-center gap-1">
                             |
-                            <TbFolderSearch/>
+                            <TbFolderSearch />
                         </span>
+
                         {isFocused && (
-                            <ul className="absolute top-16 w-96 bg-zinc-800 rounded-lg shadow-lg ">
+                            <ul className="absolute top-12 left-0 w-full bg-zinc-800 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
                                 {filteredSections.length > 0 ? (
                                     filteredSections.map(([path, section]) => (
                                         <li key={path}>
-                                            <a href={path} 
-                                                className="flex items-center gap-2 p-2 rounded-lg hover:bg-zinc-700"
+                                            <a
+                                                href={path}
+                                                className="flex items-center gap-2 p-3 rounded-lg hover:bg-zinc-700 transition-colors"
                                                 onClick={handleSelect}
-                                                >
-                                                <span className="bg-zinc-600/50 p-4 rounded-lg">{section.icon}</span>
-                                                 {section.name}
+                                            >
+                                                <span className="bg-zinc-700/50 p-2 rounded-lg">
+                                                    {section.icon}
+                                                </span>
+                                                <span className="text-zinc-100">{section.name}</span>
                                             </a>
                                         </li>
                                     ))
                                 ) : (
-                                    <li className="p-2 text-zinc-400">No encontrado</li>
+                                    <li className="p-3 text-zinc-400">No encontrado</li>
                                 )}
                             </ul>
                         )}
                     </li>
+                    <li className="mr-2">
+                        <img
+                            src="/images/perfil-bw.jpg"
+                            alt="Foto de perfil"
+                            className="h-8 w-8 sm:h-9 sm:w-9 object-cover rounded-full border border-zinc-700"
+                        />
+                    </li>
                 </div>
-                <li className="text-4xl mr-2">
-                    <img src="/images/perfil-bw.jpg"
-                        className="h-9 rounded-full"
-                    />
-                </li>
             </ul>
         </nav>
-     );
-}
- 
+    );
+};
+
 export default Navbar;

@@ -18,9 +18,11 @@ export default function RootLayout({
       </head>
       <body className="flex">
         <main className="flex-1 flex flex-col">
-          <Navbar />
-          <div className="flex gap-3">
-            <Sidebar />
+          <Navbar/>
+          <div className="flex ">
+            <aside className="hidden md:block">
+              <Sidebar />
+            </aside>
             {children}
           </div>
           <Footer/>

@@ -14,12 +14,12 @@ const SkillList = ({selectedCategory}: SkillListProps) => {
         : skills.filter(skill => skill.category === selectedCategory);
 
     return ( 
-        <main className="grid grid-cols-3 min-h-60 items-start">
-            {filteredSkills.map((skill, index)=>(
-                <Skill key={index} name={skill.name} category={skill.category} icon={skill.icon} /> 
+        <main className="grid grid-cols-2 md:grid-cols-3 gap-2 items-start">
+            {filteredSkills.map((skill, index) => (
+                <Skill key={index} name={skill.name} category={skill.category} icon={skill.icon} />
             ))}
-
         </main>
+
      );
 }
  

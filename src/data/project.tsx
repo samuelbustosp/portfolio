@@ -18,11 +18,5 @@ export const projects = [
         desc:"Sistema para la reserva y gestion de turnos.",
         stack:"React JS, Tailwind CSS"
     },
-    { 
-        name: "Q'Yerba", 
-        img: '/images/qyerba-web.png', 
-        desc:"E-commerce para una tienda de mates.",
-        stack: "React JS, Tailwind CSS, Firebase"
-    },
     
 ];
