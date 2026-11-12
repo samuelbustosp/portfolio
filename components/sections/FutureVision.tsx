@@ -60,7 +60,9 @@ export default function FutureVision() {
 
               <h3>
                 <a
-                  href="#contact"
+                  href={factory.url ?? "#contact"}
+                  target={factory.url ? "_blank" : undefined}
+                  rel={factory.url ? "noopener noreferrer" : undefined}
                   className="group/title flex items-center justify-between gap-3 text-2xl sm:text-3xl font-bold text-neutral-950 tracking-tight leading-snug w-full"
                 >
                   <span className="flex items-center gap-2 min-w-0">

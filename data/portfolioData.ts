@@ -43,6 +43,7 @@ export interface VisionItem {
   description: string;
   image: string;
   imageAlt: string;
+  url?: string;
   pillars: string[];
 }
 
@@ -60,8 +61,8 @@ export const PORTFOLIO_DATA = {
     avatarPath: "/retrato-avatar.png",
     bio: "Más que de una sola rama, me defino como ingeniero. Necesito resolver desafíos complejos y diseñar soluciones propias todo el tiempo: primero entiendo a fondo el contexto y después planifico cuidando los detalles que hacen la diferencia.",
     stats: [
-      { label: "Formación de grado", value: "UTN FRVM · Ing. en Sistemas" },
-      { label: "Promedio académico", value: "8,44 / 10" },
+      { label: "Título de grado", value: "Ingeniero en Sistemas" },
+      { label: "Universidad", value: "UTN FRVM" },
       { label: "Especialización", value: "Data, Producto & IA" },
     ],
     socials: {
@@ -238,6 +239,7 @@ export const PORTFOLIO_DATA = {
         "Crear y liderar BPS, una compañía tecnológica que acompañe a las empresas de punta a punta: desde el diagnóstico estratégico de qué necesitan hasta la ejecución técnica.",
       image: "/projects/logo-bps-factory.jpg",
       imageAlt: "Logo de BPS Factory",
+      url: "https://bps-tech.vercel.app/",
       pillars: [
         "Consultoría estratégica de negocio",
         "Ingeniería, Analytics y Ciencia de Datos",
