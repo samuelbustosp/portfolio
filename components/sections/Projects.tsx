@@ -1,141 +1,146 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import { PORTFOLIO_DATA } from "@/data/portfolioData";
-import SectionHeading from "@/components/ui/SectionHeading";
-import GlassCard from "@/components/ui/GlassCard";
-import Badge from "@/components/ui/Badge";
-import {
-  CheckCircle2,
-  Calendar,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+
+const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
 export default function Projects() {
   const { projects } = PORTFOLIO_DATA;
-  const [selectedCategory, setSelectedCategory] = useState<string>("Todos");
-
-  const categories = [
-    "Todos",
-    "Data & Analytics",
-    "Full-Stack",
-    "Cloud & Architecture",
-  ];
-
-  const filteredProjects =
-    selectedCategory === "Todos"
-      ? projects
-      : projects.filter((p) => p.category === selectedCategory);
 
   return (
-    <section id="projects" className="relative py-24 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <SectionHeading
-            badgeText="PROYECTOS & CASOS DE USO"
-            title="Proyectos Destacados"
-            subtitle="Sistemas en producción, proyectos finales de ingeniería y soluciones de datos enfocadas en rendimiento y valor de negocio."
-            className="mb-0"
-          />
-
-          {/* Filter Pills */}
-          <div className="flex flex-wrap items-center gap-1.5 p-1.5 rounded-2xl bg-zinc-950/80 border border-white/10 backdrop-blur-xl shrink-0">
-            {categories.map((category) => {
-              const isSelected = selectedCategory === category;
-              return (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`text-xs px-3.5 py-1.5 rounded-xl transition-all cursor-pointer font-medium ${
-                    isSelected
-                      ? "bg-white text-zinc-950 font-semibold shadow-sm"
-                      : "text-zinc-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
-                >
-                  {category}
-                </button>
-              );
-            })}
+    <section
+      id="projects"
+      className="py-24 sm:py-32 border-b border-neutral-200/70"
+    >
+      <div className="max-w-6xl mx-auto px-5 sm:px-10 space-y-12 sm:space-y-16">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6, ease: easeOutExpo }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6"
+        >
+          <div className="max-w-2xl space-y-3">
+            <span className="font-mono text-xs uppercase tracking-widest text-neutral-500">
+              02 // PROYECTOS EN PRODUCCIÓN
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-neutral-950">
+              Soluciones reales en funcionamiento.
+            </h2>
           </div>
-        </div>
+          <p className="text-base text-neutral-600 max-w-md">
+            Productos diseñados de punta a punta para resolver necesidades concretas de operación, ventas y gestión.
+          </p>
+        </motion.div>
 
-        {/* Project Cards Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project) => (
-            <GlassCard
+        {/* Wide, Breathable, Rounded Glass Project Cards */}
+        <div className="space-y-9">
+          {projects.map((project, idx) => (
+            <motion.article
               key={project.id}
-              variant="default"
-              className="p-6 sm:p-7 flex flex-col justify-between group border-white/[0.08] hover:border-white/20 relative"
+              initial={{ opacity: 0, y: 32, scale: 0.98 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{
+                duration: 0.6,
+                delay: idx * 0.06,
+                ease: easeOutExpo,
+              }}
+              className="light-glass rounded-3xl p-6 sm:p-12 transition-shadow hover:shadow-[0_24px_60px_-18px_rgba(0,0,0,0.09)]"
             >
-              {/* Header Info */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between gap-2">
-                  <Badge variant="neutral" size="sm">
-                    {project.badge}
-                  </Badge>
-                  <span className="font-mono text-xs text-zinc-400 flex items-center gap-1.5">
-                    <Calendar className="w-3 h-3 text-zinc-500" />
-                    {project.period}
-                  </span>
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+                {/* Left Column: Identity & Direct Link */}
+                <div className="lg:col-span-5 flex flex-col justify-between space-y-8">
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-mono text-xs uppercase tracking-widest text-neutral-400">
+                        PROYECTO {project.number}
+                      </span>
+                      <span className="px-3 py-1 rounded-full bg-neutral-900/5 font-mono text-[11px] text-neutral-600">
+                        {project.category}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-5">
+                      <div className="relative w-16 h-16 rounded-2xl bg-white/90 border border-neutral-200/80 p-1.5 shrink-0 flex items-center justify-center shadow-xs overflow-hidden">
+                        <div className="relative w-full h-full rounded-xl overflow-hidden">
+                          <Image
+                            src={project.logoPath}
+                            alt={project.name}
+                            fill
+                            sizes="64px"
+                            unoptimized={project.logoPath.endsWith(".svg")}
+                            className="object-cover rounded-xl"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <h3 className="text-2xl sm:text-3xl font-bold text-neutral-950 tracking-tight">
+                          {project.name}
+                        </h3>
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group/link inline-flex items-center gap-1.5 font-mono text-xs text-neutral-500 hover:text-neutral-950 mt-1 transition-colors"
+                        >
+                          <span>{project.domain}</span>
+                          <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="pt-2">
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-neutral-950 text-white text-xs font-mono uppercase tracking-widest hover:bg-neutral-800 hover:scale-[1.02] transition-all shadow-sm"
+                    >
+                      <span>Abrir plataforma</span>
+                      <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </a>
+                  </div>
                 </div>
 
-                <div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-zinc-200 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm font-mono text-zinc-400 mt-1">
-                    {project.subtitle}
+                {/* Right Column: Clear Summary, 3 Key Points & Tags */}
+                <div className="lg:col-span-7 lg:border-l lg:border-neutral-200/70 lg:pl-12 space-y-8">
+                  <p className="text-lg sm:text-xl text-neutral-800 leading-relaxed font-normal">
+                    {project.summary}
                   </p>
-                </div>
 
-                <p className="text-zinc-300 text-sm leading-relaxed font-normal">
-                  {project.description}
-                </p>
-
-                {/* Key Project Highlights */}
-                <div className="space-y-2 pt-2 border-t border-white/[0.06]">
-                  <h5 className="font-mono text-[11px] text-zinc-500 uppercase tracking-wider">
-                    Aspectos Clave:
-                  </h5>
-                  <ul className="space-y-2 text-xs text-zinc-300">
-                    {project.highlights.map((highlight, idx) => (
-                      <li key={idx} className="flex items-start gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
-                        <span>{highlight}</span>
+                  <ul className="space-y-3 border-t border-neutral-200/60 pt-6">
+                    {project.features.map((feature, i) => (
+                      <li
+                        key={i}
+                        className="flex items-start gap-3 text-base text-neutral-600"
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-neutral-950 mt-2.5 shrink-0" />
+                        <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
-                </div>
-              </div>
 
-              {/* Footer Tech Stack & Metrics */}
-              <div className="mt-8 pt-4 border-t border-white/[0.08] space-y-4">
-                {project.metrics && (
-                  <div className="grid grid-cols-2 gap-2 bg-zinc-950/80 p-2.5 rounded-xl border border-white/5 font-mono text-xs">
-                    {project.metrics.map((m, idx) => (
-                      <div key={idx} className="flex flex-col">
-                        <span className="text-[10px] text-zinc-500 uppercase">
-                          {m.label}
-                        </span>
-                        <span className="text-zinc-200 font-semibold">
-                          {m.value}
-                        </span>
-                      </div>
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3.5 py-1.5 rounded-full bg-white/75 border border-neutral-200/80 font-mono text-xs text-neutral-600"
+                      >
+                        {tag}
+                      </span>
                     ))}
                   </div>
-                )}
-
-                <div className="flex flex-wrap gap-1.5">
-                  {project.techStack.map((tech, idx) => (
-                    <span
-                      key={idx}
-                      className="font-mono text-[11px] px-2 py-0.5 rounded-md bg-zinc-900 text-zinc-400 border border-white/5"
-                    >
-                      {tech}
-                    </span>
-                  ))}
                 </div>
               </div>
-            </GlassCard>
+            </motion.article>
           ))}
         </div>
       </div>

@@ -1,73 +1,69 @@
-export interface Project {
+export interface PrincipleItem {
+  id: string;
+  number: string;
+  label: string;
+  title: string;
+  description: string;
+}
+
+export interface ProjectItem {
+  id: string;
+  number: string;
+  name: string;
+  domain: string;
+  category: string;
+  summary: string;
+  features: string[];
+  tags: string[];
+  liveUrl: string;
+  logoPath: string;
+}
+
+export interface CertificationItem {
+  id: string;
+  title: string;
+  institution: string;
+  date: string;
+  detail: string;
+  tags: string[];
+  certificateImage: string;
+}
+
+export interface NextStepItem {
   id: string;
   title: string;
   subtitle: string;
-  period: string;
-  category: "Data & Analytics" | "Full-Stack" | "Cloud & Architecture";
   description: string;
-  highlights: string[];
-  techStack: string[];
-  metrics?: { label: string; value: string }[];
-  featured?: boolean;
-  githubUrl?: string;
-  liveUrl?: string;
-  badge: string;
 }
 
-export interface EducationItem {
+export interface VisionItem {
   id: string;
-  degree: string;
-  institution: string;
-  period: string;
-  grade?: string;
-  status: string;
-  description?: string[];
-  certificateImage?: string;
-}
-
-export interface CourseItem {
-  id: string;
+  horizon: string;
   title: string;
-  institution: string;
-  period: string;
-  status?: "Completado" | "En curso";
   description: string;
-  tags: string[];
-  certificateImage?: string;
-}
-
-export interface SkillCategory {
-  title: string;
-  iconName: string;
-  description: string;
-  skills: {
-    name: string;
-    level: "Avanzado" | "Intermedio" | "Especializado";
-    highlight?: boolean;
-  }[];
-}
-
-export interface PipelineStage {
-  id: string;
-  name: string;
-  category: string;
-  description: string;
-  tools: string[];
-  metric: string;
+  image: string;
+  imageAlt: string;
+  pillars: string[];
 }
 
 export const PORTFOLIO_DATA = {
   personal: {
     name: "Samuel Bustos Puntis",
+    firstName: "Samuel",
+    lastName: "Bustos Puntis",
     role: "Ingeniero en Sistemas de Información",
-    specialization: "Data Analyst & Data Scientist",
+    focus: "Datos, Producto Digital & IA Aplicada",
     location: "Córdoba, Argentina",
     phone: "3584286325",
     phoneFormatted: "+54 9 358 428-6325",
     email: "samuelbustospuntis@gmail.com",
-    avatarPath: "/profile.jpg",
-    status: "DISPONIBLE PARA PROYECTOS / CONTRATACIÓN",
-    bio: "Ingeniero en Sistemas de Información graduado en la UTN con especialización integral en Data Analytics, Data Science e Ingeniería de Datos. Experto en diseñar arquitecturas de datos, pipelines ETL escalables, modelos predictivos de Machine Learning y dashboards analíticos de alto impacto para la toma de decisiones estratégicas.",
+    avatarPath: "/retrato-avatar.png",
+    bio: "Más que de una sola rama, me defino como ingeniero. Necesito resolver desafíos complejos y diseñar soluciones propias todo el tiempo: primero entiendo a fondo el contexto y después planifico cuidando los detalles que hacen la diferencia.",
+    stats: [
+      { label: "Formación de grado", value: "UTN FRVM · Ing. en Sistemas" },
+      { label: "Promedio académico", value: "8,44 / 10" },
+      { label: "Especialización", value: "Data, Producto & IA" },
+    ],
     socials: {
       linkedin: "https://www.linkedin.com/in/samuelbustospuntis",
       github: "https://github.com/samuelbustosp",
@@ -76,244 +72,193 @@ export const PORTFOLIO_DATA = {
     },
   },
 
-  telemetry: [
-    { label: "Promedio UTN", value: "8.44", unit: "PTS", highlight: true },
-    { label: "Proyectos Clave", value: "3+", unit: "PROD", highlight: false },
-    { label: "Stack Tech", value: "20+", unit: "TECHS", highlight: false },
-    { label: "Estado Profesional", value: "Graduado", unit: "UTN FRVM", highlight: true },
-  ],
-
-  pipelineStages: [
+  principles: [
     {
-      id: "ingestion",
-      name: "01. Ingesta & Fuentes",
-      category: "Data Ingestion",
-      description: "Recolección estructurada y no estructurada desde bases transaccionales, APIs REST y almacenamiento distribuido.",
-      tools: ["PostgreSQL", "MySQL", "APIs REST", "AWS S3"],
-      metric: "Multi-Source Feed",
+      id: "problems",
+      number: "01",
+      label: "Motor",
+      title: "Los problemas como motivación",
+      description:
+        "Disfruto destrabar escenarios nuevos y pensar soluciones propias en lugar de aplicar recetas genéricas.",
     },
     {
-      id: "etl",
-      name: "02. ETL & Pipelines",
-      category: "Data Processing",
-      description: "Limpieza, estandarización y transformación analítica optimizada con Python y SQL avanzado.",
-      tools: ["Python", "Pandas", "NumPy", "SQL Pipelines"],
-      metric: "High Fidelity Data",
+      id: "context",
+      number: "02",
+      label: "Método",
+      title: "Contexto antes de planificar",
+      description:
+        "Para construir desde cero primero entiendo el entorno real; recién ahí diseño cuidando cada detalle.",
     },
     {
-      id: "ml",
-      name: "03. Machine Learning & IA",
-      category: "Data Science",
-      description: "Modelado predictivo supervisado y no supervisado, feature engineering y métricas de evaluación rigurosas.",
-      tools: ["Scikit-learn", "Modelos Predictivos", "Preprocesamiento"],
-      metric: "Predictive Insights",
+      id: "data",
+      number: "03",
+      label: "Dirección",
+      title: "Los datos son el timón",
+      description:
+        "Son la conducción real de cualquier organización. Sin lectura clara se navega a ciegas; con datos hay rumbo.",
     },
     {
-      id: "infra",
-      name: "04. Cloud & IaC",
-      category: "Data Engineering",
-      description: "Arquitecturas de datos en la nube provisionadas como código con Terraform para alta disponibilidad.",
-      tools: ["AWS (S3, IAM, VPC)", "Terraform", "Git / GitHub"],
-      metric: "Scalable Cloud IaC",
+      id: "ai",
+      number: "04",
+      label: "Criterio",
+      title: "IA con propósito real",
+      description:
+        "La inteligencia artificial multiplica valor cuando resuelve una necesidad concreta, nunca como decoración.",
     },
-    {
-      id: "bi",
-      name: "05. BI & Visualización",
-      category: "Decision Intelligence",
-      description: "Dashboards ejecutivos e interactivos con KPIs clave orientados a optimizar la toma de decisiones empresariales.",
-      tools: ["Power BI", "React / Next.js", "Dashboards UI", "Excel Avanzado"],
-      metric: "KPI Decision Tools",
-    },
-  ] as PipelineStage[],
+  ] as PrincipleItem[],
 
   projects: [
     {
-      id: "carpool",
-      title: "CARPOOL",
-      subtitle: "Plataforma de Movilidad Compartida & Analítica",
-      period: "2025 – 2026",
-      category: "Full-Stack",
-      badge: "Proyecto Final de Carrera",
-      featured: true,
-      description:
-        "Sistema integral de carpooling desarrollado y defendido como Proyecto Final de Ingeniería en Sistemas de Información (UTN FRVM), alcanzando una calificación de 9/10. Combina frontend reactivo con analítica de datos en tiempo real.",
-      highlights: [
-        "Aprobación y defensa de Proyecto Final con calificación destacada de 9 / 10.",
-        "Relevamiento integral de requisitos y gestión de Product Backlog en Jira bajo metodología ágil Scrum.",
-        "Desarrollo de interfaces reactivas con Next.js y diseño de dashboards con KPIs operativos en tiempo real.",
+      id: "takeo",
+      number: "01",
+      name: "TAKEO",
+      domain: "takeo-nu.vercel.app",
+      category: "Gastronomía · Pedidos & KDS",
+      summary:
+        "Plataforma de pedidos web directos y monitor de cocina en vivo para que los locales vendan sin comisiones.",
+      features: [
+        "Pedidos desde el celular en 3 toques vía QR o link directo",
+        "Tablero Kanban de cocina en tiempo real con aviso al cliente",
+        "100% del margen para el comercio, sin intermediarios",
       ],
-      techStack: ["Next.js", "React.js", "TypeScript", "Tailwind CSS", "KPIs & Dashboards", "Jira", "Scrum"],
-      metrics: [
-        { label: "Nota de Graduación", value: "9 / 10" },
-        { label: "Metodología", value: "Scrum / Jira" },
-      ],
+      tags: ["Next.js", "Tiempo Real", "KDS", "Producto Propio"],
+      liveUrl: "https://takeo-nu.vercel.app/",
+      logoPath: "/projects/logo-takeo.svg",
     },
     {
-      id: "data-analytics",
-      title: "Data Analytics Suite",
-      subtitle: "Pipeline de Limpieza, Transformación & BI",
-      period: "2024 – 2025",
-      category: "Data & Analytics",
-      badge: "Proyecto Académico",
-      featured: true,
-      description:
-        "Desarrollo de un flujo analítico de extremo a extremo: desde la ingesta cruda y limpieza exhaustiva de datos hasta la creación de dashboards interactivos con toma de decisiones basada en métricas.",
-      highlights: [
-        "Limpieza, transformación y estructuración avanzada de datasets con Python y SQL.",
-        "Diseño de un dashboard interactivo de alto rendimiento para monitoreo de indicadores y tendencias.",
-        "Definición y cálculo de KPIs estratégicos presentados a stakeholders para la optimización de procesos.",
+      id: "pointis",
+      number: "02",
+      name: "Pointis",
+      domain: "pointis.vercel.app",
+      category: "Retail · Punto de Venta & Gestión",
+      summary:
+        "Sistema POS ágil para comercios minoristas con control de stock crítico, arqueos de caja y margen neto real.",
+      features: [
+        "Carrito híbrido para productos por unidad y pesables ($ ↔ kg)",
+        "Cierres de caja por turno, roles de empleados y alertas de stock",
+        "Cálculo exacto de rentabilidad sobre costo y proveedores",
       ],
-      techStack: ["Python", "SQL", "Pandas", "Power BI", "Data Cleaning", "KPIs", "Data Visualization"],
-      metrics: [
-        { label: "Calidad de Datos", value: "100% Validado" },
-        { label: "Visualización", value: "Power BI / Dashboard" },
-      ],
+      tags: ["POS Web", "Modo Balanza", "Rentabilidad", "Gestión"],
+      liveUrl: "https://pointis.vercel.app/",
+      logoPath: "/projects/pointis-isologo.svg",
     },
     {
-      id: "turnero-digital",
-      title: "Turnero Digital",
-      subtitle: "Arquitectura Cloud & Sistema de Gestión de Turnos",
-      period: "2026 – Actualidad",
-      category: "Cloud & Architecture",
-      badge: "Proyecto Personal Activo",
-      featured: true,
-      description:
-        "Solución SaaS para la reserva, gestión y análisis de flujo de turnos. Construida desde cero con arquitectura modular, modelo relacional optimizado y UI moderna.",
-      highlights: [
-        "Relevamiento de requisitos, alcance y diseño de experiencia de usuario orientada a la agilidad.",
-        "Diseño de la arquitectura, infraestructura en la nube y modelado de base de datos relacional.",
-        "Desarrollo completo de la interfaz de usuario con arquitectura de componentes reutilizables.",
+      id: "sofiabustos-nails",
+      number: "03",
+      name: "Sofía Bustos Studio",
+      domain: "sofiabustosnails.vercel.app",
+      category: "Servicios · Reservas & Backoffice",
+      summary:
+        "Experiencia digital, catálogo transparente y sistema de turnos online con panel de administración privado.",
+      features: [
+        "Agenda online automatizada según duración de cada servicio",
+        "Catálogo claro con tiempos, valores y criterios de atención",
+        "Panel administrativo privado para gestión diaria de turnos",
       ],
-      techStack: ["Next.js", "React.js", "PostgreSQL", "Data Modeling", "Cloud Architecture", "Tailwind CSS"],
-      metrics: [
-        { label: "Arquitectura", value: "Cloud Native" },
-        { label: "Estado", value: "En Desarrollo Activo" },
-      ],
+      tags: ["Reservas Online", "Panel Admin", "UX Editorial"],
+      liveUrl: "https://sofiabustosnails.vercel.app/",
+      logoPath: "/projects/LOGO-SB-1.jpg",
     },
-  ] as Project[],
+  ] as ProjectItem[],
 
-  skillCategories: [
-    {
-      title: "Datos & Analytics",
-      iconName: "Database",
-      description: "Especialización principal en manipulación, modelado y extracción de valor de datos.",
-      skills: [
-        { name: "Python", level: "Avanzado", highlight: true },
-        { name: "SQL", level: "Avanzado", highlight: true },
-        { name: "Pandas & NumPy", level: "Avanzado", highlight: true },
-        { name: "Scikit-learn", level: "Intermedio", highlight: true },
-        { name: "ETL & Pipelines", level: "Avanzado", highlight: true },
-        { name: "Data Visualization", level: "Avanzado" },
-        { name: "Power BI", level: "Avanzado", highlight: true },
-        { name: "Modelos Predictivos", level: "Intermedio" },
-        { name: "Excel Avanzado", level: "Avanzado" },
-      ],
-    },
-    {
-      title: "Cloud & Data Engineering",
-      iconName: "Cloud",
-      description: "Infraestructura como código y servicios de datos distribuidos en la nube.",
-      skills: [
-        { name: "AWS (S3, IAM, VPC)", level: "Intermedio", highlight: true },
-        { name: "Terraform (IaC)", level: "Intermedio", highlight: true },
-        { name: "PostgreSQL", level: "Avanzado", highlight: true },
-        { name: "MySQL", level: "Avanzado" },
-        { name: "SQL Server", level: "Intermedio" },
-        { name: "Ingesta & Procesamiento", level: "Avanzado" },
-      ],
-    },
-    {
-      title: "Desarrollo de Software",
-      iconName: "Code2",
-      description: "Creación de aplicaciones web modernas, componentes reactivos y APIs.",
-      skills: [
-        { name: "React.js", level: "Avanzado", highlight: true },
-        { name: "Next.js", level: "Avanzado", highlight: true },
-        { name: "JavaScript / TypeScript", level: "Avanzado" },
-        { name: "Java & Spring Boot", level: "Intermedio" },
-        { name: "HTML5 & CSS3", level: "Avanzado" },
-        { name: "Tailwind CSS", level: "Avanzado" },
-      ],
-    },
-    {
-      title: "Metodologías & Herramientas",
-      iconName: "Cpu",
-      description: "Prácticas de ingeniería de software, control de versiones y gestión ágil.",
-      skills: [
-        { name: "Git & GitHub", level: "Avanzado", highlight: true },
-        { name: "Scrum & Kanban", level: "Avanzado" },
-        { name: "Jira", level: "Avanzado" },
-        { name: "Trabajo en Equipo", level: "Especializado" },
-        { name: "Pensamiento Analítico", level: "Especializado" },
-      ],
-    },
-  ] as SkillCategory[],
+  education: {
+    degree: "Ingeniería en Sistemas de Información",
+    institution: "Universidad Tecnológica Nacional · Facultad Regional Villa María",
+    period: "2020 – 2026",
+    status: "Graduado",
+    average: "8,44",
+    summary:
+      "Formación de grado en arquitectura de software, análisis de sistemas, ingeniería de datos y gestión de proyectos tecnológicos.",
+  },
 
-  education: [
+  certifications: [
     {
-      id: "utn-degree",
-      degree: "Ingeniería en Sistemas de Información",
-      institution: "Universidad Tecnológica Nacional – Facultad Regional Villa María (UTN FRVM)",
-      period: "2020 – 2026",
-      grade: "8,44",
-      status: "Graduado",
-      description: [
-        "Título universitario de grado en Ingeniería en Sistemas de Información.",
-        "Promedio destacado de 8,44 / 10.",
-        "Formación integral en arquitectura de software, bases de datos, redes, gestión ágil y ciencia de datos.",
-      ],
+      id: "cert-ml",
+      title: "Data Science II: Machine Learning",
+      institution: "Coderhouse",
+      date: "Oct 2026",
+      detail: "Modelos predictivos supervisados y no supervisados · Avalado por Google",
+      tags: ["Machine Learning", "Scikit-Learn", "Python"],
+      certificateImage:
+        "/certification/Certificado__Data_Science_II__Machine_Learning_para_la_Ciencia_de_Datos_2026-10-15_page-0001.jpg",
     },
-  ] as EducationItem[],
-
-  courses: [
     {
-      id: "c-data-eng",
+      id: "cert-de",
       title: "Data Engineering",
       institution: "Coderhouse",
-      period: "En curso (2026)",
-      status: "En curso",
-      description:
-        "Desarrollo de arquitecturas de datos en AWS mediante Terraform, trabajando con infraestructura como código (IaC), S3, IAM, VPC y servicios de ingesta y procesamiento de datos.",
-      tags: ["AWS", "Terraform", "IaC", "S3", "IAM", "VPC", "Data Pipelines"],
-      certificateImage: undefined, // En curso: no preview
+      date: "Sep 2026",
+      detail: "Arquitectura de datos en AWS e infraestructura como código con Terraform",
+      tags: ["AWS", "Terraform", "Pipelines"],
+      certificateImage:
+        "/certification/Certificado__Data_Engineering_2026-09-21_page-0001.jpg",
     },
     {
-      id: "c-ml",
-      title: "Machine Learning",
-      institution: "Coderhouse",
-      period: "En curso (2026)",
-      status: "En curso",
-      description:
-        "Modelos supervisados y no supervisados, evaluación de métricas de precisión, feature engineering y preprocesamiento avanzado de datos.",
-      tags: ["Machine Learning", "Scikit-Learn", "Modelos Predictivos", "Preprocesamiento"],
-      certificateImage: undefined, // En curso: no preview
-    },
-    {
-      id: "c-data-anal",
+      id: "cert-da",
       title: "Data Analytics",
       institution: "Coderhouse",
-      period: "2026",
-      status: "Completado",
-      description:
-        "Análisis y visualización de datos de negocio, limpieza y modelado de datasets complejos, definición de KPIs estratégicos y dashboards ejecutivos en Power BI.",
-      tags: ["Power BI", "Data Analytics", "KPIs", "Limpieza de Datos", "Business Intelligence"],
+      date: "Abr 2026",
+      detail: "Modelado de datos, diseño de KPIs y tableros ejecutivos · Avalado por Ualá",
+      tags: ["Power BI", "SQL", "KPIs"],
       certificateImage: "/certification/data-analytics.png",
     },
     {
-      id: "c-react",
+      id: "cert-react",
       title: "React JS",
       institution: "Coderhouse",
-      period: "2023",
-      status: "Completado",
-      description:
-        "Desarrollo de aplicaciones web SPA y SSR con React, Hooks avanzados, Context API, gestión de estado, enrutamiento dinámico y consumo eficiente de APIs.",
-      tags: ["React.js", "Hooks", "Context API", "SPA", "REST APIs"],
+      date: "Sep 2023",
+      detail: "Desarrollo frontend moderno · Top 10 camada · Avalado por Geopagos",
+      tags: ["React", "Frontend", "APIs"],
       certificateImage: "/certification/react-js.png",
     },
-  ] as CourseItem[],
+  ] as CertificationItem[],
 
-  languages: [
-    { language: "Español", level: "Nativo" },
-    { language: "Inglés", level: "Intermedio (B1)" },
-  ],
+  nextSteps: [
+    {
+      id: "english",
+      title: "Inglés Profesional",
+      subtitle: "Próximo objetivo",
+      description:
+        "Profundizar fluidez oral y técnica para liderar proyectos y equipos internacionales.",
+    },
+    {
+      id: "ai-engineering",
+      title: "Ingeniería en IA",
+      subtitle: "Próximo objetivo",
+      description:
+        "Especialización en arquitecturas de IA, agentes y automatización en entornos productivos.",
+    },
+  ] as NextStepItem[],
+
+  visions: [
+    {
+      id: "factory",
+      horizon: "Corto & Mediano Plazo",
+      title: "Founder / CEO de BPS",
+      description:
+        "Crear y liderar BPS, una compañía tecnológica que acompañe a las empresas de punta a punta: desde el diagnóstico estratégico de qué necesitan hasta la ejecución técnica.",
+      image: "/projects/logo-bps-factory.jpg",
+      imageAlt: "Logo de BPS Factory",
+      pillars: [
+        "Consultoría estratégica de negocio",
+        "Ingeniería, Analytics y Ciencia de Datos",
+        "Automatización e IA aplicada",
+        "Desarrollo de software a medida",
+      ],
+    },
+    {
+      id: "speaker",
+      horizon: "Proyección a Futuro",
+      title: "Comunicador & Conferencista",
+      description:
+        "Compartir mi recorrido laboral real, los desafíos que atravesé y cómo pienso la ingeniería. Dar charlas y conferencias que acerquen la tecnología con honestidad y criterio.",
+      image: "/profile.jpg",
+      imageAlt: "Samuel Bustos Puntis en conferencia con micrófono",
+      pillars: [
+        "Conferencias y charlas abiertas",
+        "Relato honesto de experiencia real",
+        "Divulgación de datos e ingeniería",
+        "Mentoría y comunidad tecnológica",
+      ],
+    },
+  ] as VisionItem[],
 };

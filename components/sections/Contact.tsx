@@ -1,26 +1,15 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { PORTFOLIO_DATA } from "@/data/portfolioData";
-import SectionHeading from "@/components/ui/SectionHeading";
-import GlassCard from "@/components/ui/GlassCard";
-import GlowingButton from "@/components/ui/GlowingButton";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Copy,
-  Check,
-  Send,
-  MessageSquare,
-} from "lucide-react";
+import { ArrowUpRight, Check, Copy } from "lucide-react";
+
+const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
 export default function Contact() {
   const { personal } = PORTFOLIO_DATA;
-  const [copiedEmail, setCopiedEmail] = useState(false);
-  const [copiedPhone, setCopiedPhone] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -29,249 +18,210 @@ export default function Contact() {
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(personal.email);
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2000);
-  };
-
-  const handleCopyPhone = () => {
-    navigator.clipboard.writeText(personal.phone);
-    setCopiedPhone(true);
-    setTimeout(() => setCopiedPhone(false), 2000);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
-    setTimeout(() => {
-      window.location.href = `mailto:${personal.email}?subject=Contacto%20Portfolio%20de%20${encodeURIComponent(
-        formData.name
-      )}&body=${encodeURIComponent(formData.message)}`;
-    }, 800);
+    window.location.href = `mailto:${personal.email}?subject=Contacto%20de%20${encodeURIComponent(
+      formData.name
+    )}&body=${encodeURIComponent(formData.message)}`;
   };
 
   return (
-    <section id="contact" className="relative py-16 sm:py-24 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
-        <SectionHeading
-          badgeText="CONTACTO DIRECTO"
-          title="Iniciemos una Conversación"
-          subtitle="¿Interesado en colaborar en proyectos de ingeniería de datos, analítica avanzada, machine learning o desarrollo web? Conectemos."
-        />
+    <section id="contact" className="py-24 sm:py-32">
+      <div className="max-w-6xl mx-auto px-5 sm:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left Column: Direct Channels */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, ease: easeOutExpo }}
+            className="lg:col-span-5 space-y-8"
+          >
+            <div className="space-y-3">
+              <span className="font-mono text-xs uppercase tracking-widest text-neutral-500">
+                05 // CONTACTO
+              </span>
+              <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-neutral-950">
+                Conectemos.
+              </h2>
+              <p className="text-base sm:text-lg text-neutral-600 leading-relaxed pt-1">
+                Abierto a conversar sobre proyectos, datos, desarrollo de producto o nuevas oportunidades.
+              </p>
+            </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
-          
-          {/* Left Column: Direct Contact Info Cards */}
-          <div className="lg:col-span-5 space-y-3.5 sm:space-y-4">
-            
-            {/* Email Card */}
-            <GlassCard
-              variant="default"
-              className="p-4 sm:p-5 flex items-center justify-between border-white/[0.08] hover:border-white/20 gap-3"
-            >
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="p-2.5 sm:p-3 rounded-xl bg-zinc-900 border border-white/10 text-zinc-200 shrink-0">
-                  <Mail className="w-4 sm:w-5 h-4 sm:h-5" />
-                </div>
+            <div className="space-y-4">
+              {/* Email Card */}
+              <div className="light-glass rounded-3xl p-6 flex items-center justify-between gap-4">
                 <div className="min-w-0">
-                  <p className="text-[10px] sm:text-[11px] font-mono text-zinc-500 uppercase">
-                    Correo Electrónico
-                  </p>
+                  <span className="font-mono text-xs uppercase tracking-widest text-neutral-400 block">
+                    Email
+                  </span>
                   <a
                     href={`mailto:${personal.email}`}
-                    className="text-xs sm:text-sm font-semibold text-white hover:text-zinc-300 transition-colors truncate block"
+                    className="text-base font-medium text-neutral-950 hover:underline mt-0.5 block truncate"
                   >
                     {personal.email}
                   </a>
                 </div>
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className="px-4 py-2 rounded-full border border-neutral-300 hover:border-neutral-950 text-xs font-mono uppercase tracking-wider text-neutral-700 hover:text-neutral-950 inline-flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 bg-white/70"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5" />
+                      <span>Copiado</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copiar</span>
+                    </>
+                  )}
+                </button>
               </div>
 
-              <button
-                onClick={handleCopyEmail}
-                className="p-2 rounded-lg bg-zinc-900 border border-white/10 text-zinc-400 hover:text-white hover:border-white/20 transition-colors cursor-pointer shrink-0"
-                title="Copiar email"
-                aria-label="Copiar email"
-              >
-                {copiedEmail ? (
-                  <Check className="w-4 h-4 text-emerald-400" />
-                ) : (
-                  <Copy className="w-4 h-4" />
-                )}
-              </button>
-            </GlassCard>
-
-            {/* Phone / WhatsApp Card */}
-            <GlassCard
-              variant="default"
-              className="p-4 sm:p-5 flex items-center justify-between border-white/[0.08] hover:border-emerald-500/30 gap-3"
-            >
-              <div className="flex items-center gap-3 min-w-0">
-                <div className="p-2.5 sm:p-3 rounded-xl bg-zinc-900 border border-white/10 text-emerald-400 shrink-0">
-                  <Phone className="w-4 sm:w-5 h-4 sm:h-5" />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-[10px] sm:text-[11px] font-mono text-zinc-500 uppercase">
-                    Teléfono & WhatsApp
-                  </p>
+              {/* WhatsApp Card */}
+              <div className="light-glass rounded-3xl p-6 flex items-center justify-between gap-4">
+                <div>
+                  <span className="font-mono text-xs uppercase tracking-widest text-neutral-400 block">
+                    WhatsApp
+                  </span>
                   <a
                     href={personal.socials.whatsapp}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xs sm:text-sm font-semibold text-white hover:text-emerald-300 transition-colors truncate block"
+                    className="text-base font-medium text-neutral-950 hover:underline mt-0.5 block"
                   >
                     {personal.phoneFormatted}
                   </a>
                 </div>
+                <a
+                  href={personal.socials.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group p-2.5 rounded-full border border-neutral-300 hover:border-neutral-950 text-neutral-950 transition-colors bg-white/70"
+                  aria-label="Abrir WhatsApp"
+                >
+                  <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+              </div>
+
+              {/* LinkedIn & GitHub */}
+              <div className="grid grid-cols-2 gap-4">
+                <a
+                  href={personal.socials.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="light-glass rounded-3xl p-5 group flex items-center justify-between hover:bg-white/90 transition-all"
+                >
+                  <div>
+                    <span className="font-mono text-[11px] uppercase tracking-widest text-neutral-400 block">
+                      Red
+                    </span>
+                    <span className="text-base font-medium text-neutral-950 mt-0.5 block">
+                      LinkedIn
+                    </span>
+                  </div>
+                  <ArrowUpRight className="w-4 h-4 text-neutral-500 group-hover:text-neutral-950 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+
+                <a
+                  href={personal.socials.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="light-glass rounded-3xl p-5 group flex items-center justify-between hover:bg-white/90 transition-all"
+                >
+                  <div>
+                    <span className="font-mono text-[11px] uppercase tracking-widest text-neutral-400 block">
+                      Código
+                    </span>
+                    <span className="text-base font-medium text-neutral-950 mt-0.5 block">
+                      GitHub
+                    </span>
+                  </div>
+                  <ArrowUpRight className="w-4 h-4 text-neutral-500 group-hover:text-neutral-950 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Column: Rounded Glass Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 28, scale: 0.98 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: easeOutExpo }}
+            className="lg:col-span-7"
+          >
+            <form
+              onSubmit={handleSubmit}
+              className="light-glass-strong rounded-3xl p-8 sm:p-12 space-y-6"
+            >
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="font-mono text-xs uppercase tracking-widest text-neutral-600 block">
+                    Nombre
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({ ...formData, name: e.target.value })
+                    }
+                    placeholder="Tu nombre"
+                    className="w-full rounded-2xl bg-white/80 border border-neutral-200 focus:border-neutral-950 px-4 py-3.5 text-base text-neutral-950 placeholder-neutral-400 outline-none transition-colors"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="font-mono text-xs uppercase tracking-widest text-neutral-600 block">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
+                    placeholder="tu@correo.com"
+                    className="w-full rounded-2xl bg-white/80 border border-neutral-200 focus:border-neutral-950 px-4 py-3.5 text-base text-neutral-950 placeholder-neutral-400 outline-none transition-colors"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="font-mono text-xs uppercase tracking-widest text-neutral-600 block">
+                  Mensaje
+                </label>
+                <textarea
+                  required
+                  rows={5}
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({ ...formData, message: e.target.value })
+                  }
+                  placeholder="Contame brevemente sobre el proyecto o propuesta..."
+                  className="w-full rounded-2xl bg-white/80 border border-neutral-200 focus:border-neutral-950 px-4 py-3.5 text-base text-neutral-950 placeholder-neutral-400 outline-none transition-colors resize-none"
+                />
               </div>
 
               <button
-                onClick={handleCopyPhone}
-                className="p-2 rounded-lg bg-zinc-900 border border-white/10 text-zinc-400 hover:text-emerald-300 hover:border-white/20 transition-colors cursor-pointer shrink-0"
-                title="Copiar teléfono"
-                aria-label="Copiar teléfono"
+                type="submit"
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-neutral-950 text-white text-xs font-mono uppercase tracking-widest hover:bg-neutral-800 hover:scale-[1.02] transition-all cursor-pointer shadow-md"
               >
-                {copiedPhone ? (
-                  <Check className="w-4 h-4 text-emerald-400" />
-                ) : (
-                  <Copy className="w-4 h-4" />
-                )}
+                <span>Enviar mensaje</span>
+                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </button>
-            </GlassCard>
-
-            {/* Location Card */}
-            <GlassCard
-              variant="subtle"
-              className="p-4 sm:p-5 flex items-center gap-3 border-white/[0.08]"
-            >
-              <div className="p-2.5 sm:p-3 rounded-xl bg-zinc-900 border border-white/10 text-zinc-300 shrink-0">
-                <MapPin className="w-4 sm:w-5 h-4 sm:h-5" />
-              </div>
-              <div>
-                <p className="text-[10px] sm:text-[11px] font-mono text-zinc-500 uppercase">
-                  Ubicación
-                </p>
-                <p className="text-xs sm:text-sm font-semibold text-white">{personal.location}</p>
-              </div>
-            </GlassCard>
-
-            {/* Social Links Row */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-              <a
-                href={personal.socials.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3.5 sm:p-4 rounded-xl bg-zinc-900/80 hover:bg-zinc-800 border border-white/[0.08] hover:border-white/20 transition-all flex items-center gap-3 group"
-              >
-                <LinkedinIcon className="w-5 h-5 text-zinc-300 group-hover:text-white transition-colors shrink-0" />
-                <div className="min-w-0">
-                  <p className="text-xs font-semibold text-white">LinkedIn</p>
-                  <p className="text-[10px] font-mono text-zinc-400 truncate">/samuel-bustos-puntis</p>
-                </div>
-              </a>
-
-              <a
-                href={personal.socials.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-3.5 sm:p-4 rounded-xl bg-zinc-900/80 hover:bg-zinc-800 border border-white/[0.08] hover:border-white/20 transition-all flex items-center gap-3 group"
-              >
-                <GithubIcon className="w-5 h-5 text-zinc-300 group-hover:text-white transition-colors shrink-0" />
-                <div className="min-w-0">
-                  <p className="text-xs font-semibold text-white">GitHub</p>
-                  <p className="text-[10px] font-mono text-zinc-400 truncate">/SamuelBustosPuntis</p>
-                </div>
-              </a>
-            </div>
-          </div>
-
-          {/* Right Column: Direct Message Form */}
-          <div className="lg:col-span-7">
-            <GlassCard
-              variant="glow"
-              className="p-5 sm:p-8 border-white/15 relative"
-            >
-              <h3 className="text-lg sm:text-xl font-bold text-white mb-1 flex items-center gap-2">
-                <MessageSquare className="w-4 sm:w-5 h-4 sm:h-5 text-zinc-300" />
-                Enviar Mensaje Directo
-              </h3>
-              <p className="text-xs text-zinc-400 mb-5 sm:mb-6">
-                Completa el formulario para enviar un mensaje instantáneo.
-              </p>
-
-              {formSubmitted ? (
-                <div className="p-6 rounded-2xl bg-zinc-900 border border-emerald-500/30 text-center space-y-2">
-                  <Check className="w-8 h-8 text-emerald-400 mx-auto animate-bounce" />
-                  <h4 className="text-lg font-bold text-white">
-                    ¡Mensaje Preparado!
-                  </h4>
-                  <p className="text-xs text-zinc-400">
-                    Redirigiendo a tu cliente de correo para confirmar el envío a {personal.email}...
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-3.5 sm:space-y-4">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-mono text-zinc-300">
-                        Nombre / Organización
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) =>
-                          setFormData({ ...formData, name: e.target.value })
-                        }
-                        placeholder="Ej. Martín González"
-                        className="w-full bg-zinc-950/80 border border-white/10 focus:border-white/30 rounded-xl px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm text-white placeholder-zinc-600 outline-none transition-colors"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="text-xs font-mono text-zinc-300">
-                        Tu Email
-                      </label>
-                      <input
-                        type="email"
-                        required
-                        value={formData.email}
-                        onChange={(e) =>
-                          setFormData({ ...formData, email: e.target.value })
-                        }
-                        placeholder="tu@empresa.com"
-                        className="w-full bg-zinc-950/80 border border-white/10 focus:border-white/30 rounded-xl px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm text-white placeholder-zinc-600 outline-none transition-colors"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-mono text-zinc-300">
-                      Mensaje / Proyecto
-                    </label>
-                    <textarea
-                      required
-                      rows={4}
-                      value={formData.message}
-                      onChange={(e) =>
-                        setFormData({ ...formData, message: e.target.value })
-                      }
-                      placeholder="Cuéntame sobre la posición, proyecto o desafío de datos..."
-                      className="w-full bg-zinc-950/80 border border-white/10 focus:border-white/30 rounded-xl px-3.5 sm:px-4 py-2.5 text-xs sm:text-sm text-white placeholder-zinc-600 outline-none transition-colors resize-none"
-                    />
-                  </div>
-
-                  <GlowingButton
-                    type="submit"
-                    variant="primary"
-                    size="lg"
-                    className="w-full justify-center"
-                    icon={<Send className="w-4 h-4" />}
-                  >
-                    Enviar Mensaje
-                  </GlowingButton>
-                </form>
-              )}
-            </GlassCard>
-          </div>
+            </form>
+          </motion.div>
         </div>
       </div>
     </section>

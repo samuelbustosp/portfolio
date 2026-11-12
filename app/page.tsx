@@ -1,36 +1,37 @@
 import React from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import ParticleMesh from "@/components/background/ParticleMesh";
 import Hero from "@/components/sections/Hero";
-import DataPipeline from "@/components/sections/DataPipeline";
+import EngineeringMindset from "@/components/sections/EngineeringMindset";
 import Projects from "@/components/sections/Projects";
-import SkillsMatrix from "@/components/sections/SkillsMatrix";
 import ExperienceEducation from "@/components/sections/ExperienceEducation";
-import TerminalConsole from "@/components/sections/TerminalConsole";
+import FutureVision from "@/components/sections/FutureVision";
 import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-[#09090b] text-zinc-100 selection:bg-white/20 selection:text-white">
-      {/* Monochrome Minimal Particle Mesh */}
-      <ParticleMesh />
+    <main className="relative min-h-screen bg-[#F8F7F4] text-neutral-900 overflow-x-clip">
+      {/* Subtle Ambient Light Shapes for Glass Blur Depth */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+      >
+        <div className="absolute -top-40 -left-32 w-[560px] h-[560px] rounded-full bg-amber-200/35 blur-[130px]" />
+        <div className="absolute top-[22%] -right-32 w-[520px] h-[520px] rounded-full bg-sky-200/30 blur-[140px]" />
+        <div className="absolute bottom-[15%] left-[12%] w-[480px] h-[480px] rounded-full bg-stone-300/35 blur-[130px]" />
+      </div>
 
-      {/* Floating Glass Navbar */}
       <Navbar />
 
-      {/* Main Content Sections */}
-      <div className="relative z-10 flex flex-col space-y-8 sm:space-y-16">
+      <div className="relative z-10">
         <Hero />
-        <DataPipeline />
+        <EngineeringMindset />
         <Projects />
-        <SkillsMatrix />
         <ExperienceEducation />
-        <TerminalConsole />
+        <FutureVision />
         <Contact />
       </div>
 
-      {/* Footer */}
       <Footer />
     </main>
   );

@@ -1,156 +1,150 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import { PORTFOLIO_DATA } from "@/data/portfolioData";
-import ProfilePhotoFrame from "./ProfilePhotoFrame";
-import GlowingButton from "@/components/ui/GlowingButton";
-import GlassCard from "@/components/ui/GlassCard";
-import {
-  ArrowRight,
-  MapPin,
-  GraduationCap,
-  Layers,
-  Activity,
-  Terminal,
-} from "lucide-react";
+import { ArrowDownRight, ArrowUpRight } from "lucide-react";
+
+const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
 export default function Hero() {
-  const { personal, telemetry } = PORTFOLIO_DATA;
+  const { personal } = PORTFOLIO_DATA;
 
   return (
     <section
       id="hero"
-      className="relative min-h-[85vh] pt-24 sm:pt-32 pb-12 sm:pb-16 flex items-center justify-center overflow-hidden"
+      className="pt-28 sm:pt-40 pb-16 sm:pb-28 border-b border-neutral-200/70"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 w-full relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-8 items-center">
-          
-          {/* Left Column: Executive Identity */}
-          <div className="lg:col-span-7 flex flex-col items-start text-left space-y-5 sm:space-y-6">
-            
-            {/* Status Pill */}
-            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full bg-zinc-900/90 border border-white/10 backdrop-blur-xl shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.96 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.9, ease: easeOutExpo }}
+        className="max-w-6xl mx-auto px-5 sm:px-10"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          {/* Left Column: Staggered Blur-to-Focus Entrance */}
+          <div className="lg:col-span-7 space-y-7">
+            <motion.div
+              initial={{ opacity: 0, y: 14, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.65, delay: 0.1, ease: easeOutExpo }}
+              className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full light-glass"
+            >
+              <span className="w-2 h-2 rounded-full bg-neutral-950 inline-block" />
+              <span className="font-mono text-xs uppercase tracking-widest text-neutral-600">
+                {personal.location} · {personal.focus}
               </span>
-              <span className="font-mono text-xs text-zinc-300 font-medium tracking-wide">
-                Disponible para contratación
-              </span>
+            </motion.div>
+
+            <div className="space-y-4">
+              <motion.h1
+                initial={{ opacity: 0, y: 22, scale: 0.98, filter: "blur(12px)" }}
+                animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+                transition={{ duration: 0.85, delay: 0.18, ease: easeOutExpo }}
+                className="text-4xl sm:text-6xl font-bold tracking-tight text-neutral-950 leading-[1.06]"
+              >
+                {personal.name}
+              </motion.h1>
+
+              <motion.p
+                initial={{ opacity: 0, y: 18, filter: "blur(10px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ duration: 0.75, delay: 0.3, ease: easeOutExpo }}
+                className="text-xl sm:text-2xl text-neutral-700 font-normal leading-snug"
+              >
+                {personal.role}.{" "}
+                <span className="text-neutral-500">
+                  Enfocado en resolver problemas reales con datos, criterio y producto.
+                </span>
+              </motion.p>
             </div>
 
-            {/* Main Name & Title */}
-            <div className="space-y-1 sm:space-y-2">
-              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white font-sans leading-[1.1]">
-                Samuel <br />
-                <span className="text-gradient-silver">
-                  Bustos Puntis
-                </span>
-              </h1>
-              
-              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 pt-1 sm:pt-2">
-                <span className="text-base sm:text-xl lg:text-2xl font-medium text-zinc-300">
-                  {personal.role}
-                </span>
-                <span className="text-zinc-600 font-mono hidden sm:inline">•</span>
-                <span className="text-base sm:text-xl lg:text-2xl font-medium text-zinc-400">
-                  {personal.specialization}
-                </span>
+            <motion.p
+              initial={{ opacity: 0, y: 16, filter: "blur(6px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              transition={{ duration: 0.7, delay: 0.4, ease: easeOutExpo }}
+              className="text-base sm:text-lg text-neutral-600 leading-relaxed max-w-xl"
+            >
+              {personal.bio}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.48, ease: easeOutExpo }}
+              className="flex flex-wrap items-center gap-4 pt-2"
+            >
+              <a
+                href="#projects"
+                className="group inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-neutral-950 text-white text-xs font-mono uppercase tracking-widest hover:bg-neutral-800 hover:scale-[1.02] transition-all shadow-md"
+              >
+                <span>Ver proyectos</span>
+                <ArrowDownRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+              </a>
+
+              <a
+                href="#contact"
+                className="group inline-flex items-center gap-2.5 px-7 py-4 rounded-full light-glass text-neutral-950 hover:bg-white/90 hover:scale-[1.02] text-xs font-mono uppercase tracking-widest transition-all"
+              >
+                <span>Contacto directo</span>
+                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Main Portrait with B&W-to-Color Entrance */}
+          <motion.div
+            initial={{ opacity: 0, scale: 1.08, filter: "grayscale(100%)" }}
+            animate={{ opacity: 1, scale: 1, filter: "grayscale(0%)" }}
+            transition={{
+              opacity: { duration: 0.7, delay: 0.15, ease: easeOutExpo },
+              scale: { duration: 0.95, delay: 0.15, ease: easeOutExpo },
+              filter: { duration: 1.2, delay: 0.55, ease: "easeInOut" },
+            }}
+            className="lg:col-span-5 flex justify-center lg:justify-end"
+          >
+            <div className="relative w-full max-w-[300px] sm:max-w-[360px]">
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 translate-x-2 translate-y-2 sm:translate-x-3 sm:translate-y-3 rounded-[2rem] light-glass"
+              />
+              <div className="relative aspect-[4/5] w-full rounded-[2rem] bg-white/80 border border-white shadow-[0_20px_50px_-15px_rgba(0,0,0,0.12)] overflow-hidden">
+                <Image
+                  src={personal.avatarPath}
+                  alt={personal.name}
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 90vw, 360px"
+                  className="object-cover object-top"
+                />
               </div>
             </div>
-
-            {/* Bio summary */}
-            <p className="text-zinc-400 text-sm sm:text-base md:text-lg leading-relaxed font-normal max-w-2xl bg-zinc-900/40 p-4 rounded-2xl border border-white/[0.06] backdrop-blur-md">
-              Graduado de la <strong className="text-white font-medium">UTN FRVM</strong> con especialización en <strong className="text-zinc-200 font-medium">Data Analytics, Data Science e Ingeniería de Datos</strong>. Enfoque en transformar información compleja en soluciones accionables, pipelines ETL escalables y modelos analíticos de alto impacto para la toma de decisiones.
-            </p>
-
-            {/* Quick Metadata Chips */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono text-zinc-400">
-              <span className="flex items-center gap-1.5 bg-zinc-900/80 px-2.5 sm:px-3 py-1.5 rounded-xl border border-white/[0.08]">
-                <MapPin className="w-3.5 h-3.5 text-zinc-300" />
-                {personal.location}
-              </span>
-              <span className="flex items-center gap-1.5 bg-zinc-900/80 px-2.5 sm:px-3 py-1.5 rounded-xl border border-white/[0.08]">
-                <GraduationCap className="w-3.5 h-3.5 text-emerald-400" />
-                UTN FRVM (Promedio: 8.44)
-              </span>
-              <span className="flex items-center gap-1.5 bg-zinc-900/80 px-2.5 sm:px-3 py-1.5 rounded-xl border border-white/[0.08]">
-                <Layers className="w-3.5 h-3.5 text-zinc-300" />
-                Python • SQL • AWS • React
-              </span>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 pt-2 w-full sm:w-auto">
-              <GlowingButton
-                asAnchor
-                href="#projects"
-                variant="primary"
-                size="lg"
-                className="w-full sm:w-auto text-center"
-                icon={<ArrowRight className="w-4 h-4" />}
-              >
-                Ver Proyectos
-              </GlowingButton>
-
-              <GlowingButton
-                asAnchor
-                href="#pipeline"
-                variant="secondary"
-                size="lg"
-                className="w-full sm:w-auto text-center"
-                icon={<Activity className="w-4 h-4 text-emerald-400" />}
-              >
-                Arquitectura de Datos
-              </GlowingButton>
-
-              <GlowingButton
-                asAnchor
-                href="#terminal"
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto text-center"
-                icon={<Terminal className="w-4 h-4 text-zinc-400" />}
-              >
-                Terminal
-              </GlowingButton>
-            </div>
-          </div>
-
-          {/* Right Column: Single Photo Slot with responsive ordering */}
-          <div className="lg:col-span-5 flex flex-col items-center justify-center">
-            <ProfilePhotoFrame
-              photoSrc={personal.avatarPath}
-              name={personal.name}
-            />
-          </div>
+          </motion.div>
         </div>
 
-        {/* Executive Telemetry Grid */}
-        <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-white/10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-            {telemetry.map((item, index) => (
-              <GlassCard
-                key={index}
-                variant="default"
-                className="p-3.5 sm:p-5 flex flex-col items-start relative group border-white/[0.08]"
-              >
-                <span className="text-[10px] sm:text-[11px] font-mono text-zinc-500 uppercase mb-1">
-                  {item.label}
-                </span>
-                <div className="flex items-baseline gap-1.5 sm:gap-2">
-                  <span className="text-xl sm:text-2xl md:text-3xl font-bold font-mono text-white">
-                    {item.value}
-                  </span>
-                  <span className="text-[10px] sm:text-xs font-mono text-zinc-500 font-medium">
-                    {item.unit}
-                  </span>
-                </div>
-              </GlassCard>
-            ))}
-          </div>
-        </div>
-      </div>
+        {/* Rounded Glass Key Facts Strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, delay: 0.55, ease: easeOutExpo }}
+          className="mt-16 sm:mt-20 grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6"
+        >
+          {personal.stats.map((stat, index) => (
+            <div
+              key={stat.label}
+              className="light-glass rounded-3xl p-6 sm:p-7 flex flex-col space-y-1.5"
+            >
+              <span className="font-mono text-xs uppercase tracking-widest text-neutral-400">
+                0{index + 1} / {stat.label}
+              </span>
+              <span className="text-lg sm:text-xl font-semibold text-neutral-950 tracking-tight">
+                {stat.value}
+              </span>
+            </div>
+          ))}
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

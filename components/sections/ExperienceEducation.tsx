@@ -3,291 +3,270 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
-import { PORTFOLIO_DATA, CourseItem } from "@/data/portfolioData";
-import SectionHeading from "@/components/ui/SectionHeading";
-import GlassCard from "@/components/ui/GlassCard";
-import Badge from "@/components/ui/Badge";
-import {
-  GraduationCap,
-  Award,
-  Calendar,
-  CheckCircle2,
-  Eye,
-  X,
-  FileCheck,
-} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { PORTFOLIO_DATA, CertificationItem } from "@/data/portfolioData";
+import { ArrowUpRight, X } from "lucide-react";
 
-interface ModalCertificate {
-  title: string;
-  institution: string;
-  period: string;
-  imageSrc: string;
-}
+const easeOutExpo = [0.22, 1, 0.36, 1] as const;
 
 export default function ExperienceEducation() {
-  const { education, courses } = PORTFOLIO_DATA;
-  const [activeCertificate, setActiveCertificate] = useState<ModalCertificate | null>(null);
-  const [imgErrorMap, setImgErrorMap] = useState<{ [key: string]: boolean }>({});
-  const [mounted, setMounted] = useState(false);
+  const { education, certifications, nextSteps } = PORTFOLIO_DATA;
+  const [selectedCert, setSelectedCert] = useState<CertificationItem | null>(
+    null
+  );
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    document.body.style.overflow = selectedCert ? "hidden" : "unset";
+    if (!selectedCert) return;
 
-  useEffect(() => {
-    if (activeCertificate) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedCert(null);
+    };
+    window.addEventListener("keydown", onKeyDown);
     return () => {
       document.body.style.overflow = "unset";
+      window.removeEventListener("keydown", onKeyDown);
     };
-  }, [activeCertificate]);
-
-  const handleOpenCertificate = (item: CourseItem) => {
-    if (!item.certificateImage) return;
-    setActiveCertificate({
-      title: item.title,
-      institution: item.institution,
-      period: item.period,
-      imageSrc: item.certificateImage,
-    });
-  };
+  }, [selectedCert]);
 
   return (
-    <section id="education" className="relative py-16 sm:py-24 px-4 sm:px-6">
-      <div className="max-w-7xl mx-auto">
-        <SectionHeading
-          badgeText="FORMACIÓN ACADÉMICA"
-          title="Educación & Certificaciones"
-          subtitle="Grado en Ingeniería en Sistemas de Información y especializaciones en Big Data, Machine Learning, Ingeniería de Datos y Desarrollo Web."
-        />
+    <section
+      id="education"
+      className="py-24 sm:py-32 border-b border-neutral-200/70"
+    >
+      <div className="max-w-6xl mx-auto px-5 sm:px-10 space-y-16 sm:space-y-20">
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.6, ease: easeOutExpo }}
+          className="max-w-2xl space-y-3"
+        >
+          <span className="font-mono text-xs uppercase tracking-widest text-neutral-500">
+            03 // FORMACIÓN ACADÉMICA & CERTIFICACIONES
+          </span>
+          <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-neutral-950">
+            Base universitaria y capacitación continua.
+          </h2>
+        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          {/* Left Column: University Degree (Clean, no modal) */}
-          <div className="lg:col-span-5 space-y-6">
-            <h3 className="text-xs uppercase text-zinc-400 font-semibold tracking-wider flex items-center gap-2 font-mono">
-              <GraduationCap className="w-4 h-4 text-emerald-400" />
-              Título de Grado Universitario
+        {/* University Degree — Rounded Glass Block */}
+        <motion.div
+          initial={{ opacity: 0, y: 28, scale: 0.98 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: easeOutExpo }}
+          className="light-glass-strong rounded-3xl p-8 sm:p-12"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div className="lg:col-span-8 space-y-4">
+              <div className="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-widest text-neutral-500">
+                <span className="px-3.5 py-1 rounded-full bg-neutral-950 text-white">
+                  {education.status}
+                </span>
+                <span>{education.period}</span>
+              </div>
+
+              <h3 className="text-2xl sm:text-4xl font-bold text-neutral-950 tracking-tight">
+                {education.degree}
+              </h3>
+
+              <p className="font-mono text-sm text-neutral-600">
+                {education.institution}
+              </p>
+
+              <p className="text-base sm:text-lg text-neutral-600 leading-relaxed max-w-2xl pt-2">
+                {education.summary}
+              </p>
+            </div>
+
+            <div className="lg:col-span-4 lg:border-l lg:border-neutral-200/70 lg:pl-12 flex flex-col justify-center">
+              <span className="font-mono text-xs uppercase tracking-widest text-neutral-400">
+                Promedio Académico
+              </span>
+              <div className="flex items-baseline gap-2 mt-2">
+                <span className="text-5xl sm:text-6xl font-bold text-neutral-950 tracking-tight">
+                  {education.average}
+                </span>
+                <span className="font-mono text-sm text-neutral-400">/ 10</span>
+              </div>
+              <span className="text-xs font-mono text-neutral-500 mt-2">
+                Título de grado finalizado
+              </span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Completed Certifications — Spacious Rounded Glass 2x2 Grid */}
+        <div className="space-y-8">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-neutral-200/70 pb-4">
+            <h3 className="text-xl sm:text-2xl font-bold text-neutral-950">
+              Especializaciones Completadas
             </h3>
-
-            {education.map((edu) => (
-              <GlassCard
-                key={edu.id}
-                variant="glow"
-                className="p-5 sm:p-8 border-white/15 relative overflow-hidden"
-              >
-                {/* Grade Badge */}
-                <div className="absolute top-5 sm:top-6 right-5 sm:right-6">
-                  <div className="flex flex-col items-end">
-                    <span className="font-mono text-[10px] text-zinc-500 uppercase">
-                      Promedio
-                    </span>
-                    <span className="font-mono text-xl sm:text-2xl font-bold text-white">
-                      {edu.grade} <span className="text-xs text-zinc-400 font-normal">/10</span>
-                    </span>
-                  </div>
-                </div>
-
-                <div className="space-y-4 pr-16 sm:pr-20">
-                  <Badge variant="emerald" size="sm">
-                    {edu.status}
-                  </Badge>
-
-                  <div>
-                    <h4 className="text-xl sm:text-2xl font-bold text-white font-sans">
-                      {edu.degree}
-                    </h4>
-                    <p className="text-xs sm:text-sm font-mono text-zinc-300 mt-1">
-                      {edu.institution}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-2 text-xs font-mono text-zinc-400">
-                    <Calendar className="w-3.5 h-3.5 text-zinc-500" />
-                    <span>{edu.period}</span>
-                  </div>
-                </div>
-
-                {edu.description && (
-                  <div className="mt-6 pt-4 border-t border-white/10 space-y-2.5 text-sm text-zinc-300">
-                    {edu.description.map((desc, dIdx) => (
-                      <div key={dIdx} className="flex items-start gap-2.5">
-                        <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                        <p className="text-xs leading-relaxed text-zinc-300">{desc}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </GlassCard>
-            ))}
+            <span className="font-mono text-xs text-neutral-500">
+              Seleccioná cualquiera para ver el diploma original
+            </span>
           </div>
 
-          {/* Right Column: Certifications */}
-          <div className="lg:col-span-7 space-y-6">
-            <h3 className="text-xs uppercase text-zinc-400 font-semibold tracking-wider flex items-center gap-2 font-mono">
-              <Award className="w-4 h-4 text-zinc-300" />
-              Especializaciones & Certificaciones
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-9">
+            {certifications.map((cert, idx) => (
+              <motion.div
+                key={cert.id}
+                initial={{ opacity: 0, y: 28, scale: 0.98 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{
+                  duration: 0.55,
+                  delay: idx * 0.08,
+                  ease: easeOutExpo,
+                }}
+                whileHover={{ y: -4 }}
+                onClick={() => setSelectedCert(cert)}
+                className="group light-glass rounded-3xl p-8 sm:p-10 flex flex-col justify-between gap-8 cursor-pointer transition-shadow hover:shadow-[0_20px_50px_-15px_rgba(0,0,0,0.09)]"
+              >
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between font-mono text-xs text-neutral-500">
+                    <span className="px-3 py-1 rounded-full bg-neutral-900/5 uppercase tracking-wider text-neutral-600">
+                      {cert.institution}
+                    </span>
+                    <span>{cert.date}</span>
+                  </div>
+
+                  <div className="relative w-full h-48 rounded-2xl bg-white/70 border border-neutral-200/70 overflow-hidden">
+                    <Image
+                      src={cert.certificateImage}
+                      alt={cert.title}
+                      fill
+                      sizes="(max-width: 768px) 90vw, 480px"
+                      className="object-contain p-3 group-hover:scale-[1.03] transition-transform duration-300"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <h4 className="text-xl sm:text-2xl font-bold text-neutral-950 tracking-tight">
+                      {cert.title}
+                    </h4>
+                    <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
+                      {cert.detail}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="pt-6 border-t border-neutral-200/60 flex items-center justify-between gap-4">
+                  <div className="flex flex-wrap gap-2">
+                    {cert.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-3 py-1 rounded-full bg-white/75 border border-neutral-200/80 font-mono text-[11px] text-neutral-600"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-neutral-950 text-white font-mono text-xs uppercase tracking-wider shrink-0 group-hover:bg-neutral-800 transition-colors">
+                    <span>Ver</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Next Learning Goals */}
+        <div className="space-y-6">
+          <div className="border-b border-neutral-200/70 pb-4">
+            <h3 className="text-xl sm:text-2xl font-bold text-neutral-950">
+              Próximos pasos de formación
             </h3>
+          </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {courses.map((course) => {
-                const hasCert = Boolean(course.certificateImage);
-
-                return (
-                  <GlassCard
-                    key={course.id}
-                    variant="default"
-                    className={`p-4 sm:p-5 flex flex-col justify-between border-white/[0.08] transition-all duration-300 ${
-                      hasCert
-                        ? "cursor-pointer hover:border-white/30 hover:bg-zinc-900/90"
-                        : ""
-                    }`}
-                    onClick={() => hasCert && handleOpenCertificate(course)}
-                  >
-                    <div className="space-y-3">
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="flex items-center gap-2">
-                          <Badge
-                            variant={course.status === "En curso" ? "purple" : "neutral"}
-                            size="sm"
-                          >
-                            {course.status}
-                          </Badge>
-                          {hasCert && (
-                            <span className="inline-flex items-center gap-1 font-mono text-[10px] text-zinc-400 bg-zinc-950 px-2 py-0.5 rounded-full border border-white/5 group-hover:text-white">
-                              <FileCheck className="w-3 h-3 text-emerald-400" />
-                              Certificado
-                            </span>
-                          )}
-                        </div>
-                        <span className="font-mono text-[11px] text-zinc-500">
-                          {course.period}
-                        </span>
-                      </div>
-
-                      <div>
-                        <h4 className="text-base sm:text-lg font-bold text-white font-sans">
-                          {course.title}
-                        </h4>
-                        <p className="text-xs font-mono text-zinc-400">
-                          {course.institution}
-                        </p>
-                      </div>
-
-                      <p className="text-xs text-zinc-400 leading-relaxed line-clamp-4">
-                        {course.description}
-                      </p>
-                    </div>
-
-                    <div className="mt-4 pt-3 border-t border-white/5 flex flex-wrap items-center justify-between gap-2">
-                      <div className="flex flex-wrap gap-1.5">
-                        {course.tags.slice(0, 3).map((tag, tIdx) => (
-                          <span
-                            key={tIdx}
-                            className="font-mono text-[10px] px-2 py-0.5 rounded bg-zinc-900 text-zinc-400 border border-white/5"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-
-                      {hasCert && (
-                        <span className="text-[11px] font-mono text-zinc-300 flex items-center gap-1 hover:text-white transition-colors bg-zinc-900 px-2 py-0.5 rounded border border-white/10">
-                          <Eye className="w-3 h-3 text-emerald-400" /> Ver Certificado
-                        </span>
-                      )}
-                    </div>
-                  </GlassCard>
-                );
-              })}
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-9">
+            {nextSteps.map((step, index) => (
+              <motion.div
+                key={step.id}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.55,
+                  delay: index * 0.08,
+                  ease: easeOutExpo,
+                }}
+                className="light-glass rounded-3xl p-8 sm:p-10 space-y-3"
+              >
+                <span className="font-mono text-xs uppercase tracking-widest text-neutral-500">
+                  0{index + 1} · {step.subtitle}
+                </span>
+                <h4 className="text-2xl font-bold text-neutral-950">
+                  {step.title}
+                </h4>
+                <p className="text-base text-neutral-600 leading-relaxed">
+                  {step.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Full-Screen Certificate Modal using React Portal directly into body to prevent any z-index or stacking overlap */}
-      {mounted && activeCertificate && createPortal(
-        <div
-          className="fixed inset-0 z-[99999] bg-black/95 backdrop-blur-2xl flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-in fade-in duration-150"
-          onClick={() => setActiveCertificate(null)}
-        >
-          <div
-            className="relative max-w-3xl w-full bg-zinc-950 border border-white/20 rounded-3xl p-5 sm:p-7 shadow-2xl space-y-4 my-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="flex items-start justify-between border-b border-white/10 pb-4 gap-4">
-              <div>
-                <span className="font-mono text-[11px] text-zinc-400 uppercase tracking-wider">
-                  Certificación Oficial
-                </span>
-                <h3 className="text-lg sm:text-2xl font-bold text-white mt-0.5">
-                  {activeCertificate.title}
-                </h3>
-                <p className="text-xs font-mono text-zinc-400 mt-0.5">
-                  {activeCertificate.institution} • {activeCertificate.period}
-                </p>
-              </div>
-
-              <button
-                onClick={() => setActiveCertificate(null)}
-                className="p-2 rounded-xl bg-zinc-900 border border-white/10 text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer shrink-0"
-                aria-label="Cerrar modal"
+      {/* Rounded Glass Lightbox Modal (Responsive for 1333x766 & Mobile) */}
+      {typeof document !== "undefined" &&
+        createPortal(
+          <AnimatePresence>
+            {selectedCert && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 z-[9999] bg-neutral-950/60 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto"
+                onClick={() => setSelectedCert(null)}
               >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.94, y: 12 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.94, y: 12 }}
+                  transition={{ duration: 0.25, ease: easeOutExpo }}
+                  className="light-glass-strong rounded-3xl max-w-4xl w-full max-h-[90vh] flex flex-col p-5 sm:p-7 gap-4 sm:gap-5 overflow-hidden my-auto"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="flex items-start justify-between gap-4 border-b border-neutral-200/70 pb-4 shrink-0">
+                    <div className="min-w-0">
+                      <span className="font-mono text-[11px] sm:text-xs uppercase tracking-widest text-neutral-500 block">
+                        {selectedCert.institution} · {selectedCert.date}
+                      </span>
+                      <h3 className="text-lg sm:text-2xl font-bold text-neutral-950 mt-1 leading-snug">
+                        {selectedCert.title}
+                      </h3>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCert(null)}
+                      className="p-2 rounded-full border border-neutral-300 hover:border-neutral-950 text-neutral-950 transition-colors cursor-pointer shrink-0"
+                      aria-label="Cerrar"
+                    >
+                      <X className="w-5 h-5" />
+                    </button>
+                  </div>
 
-            {/* Certificate Image Canvas */}
-            <div className="relative w-full h-64 sm:h-96 rounded-2xl overflow-hidden bg-zinc-900 border border-white/10 flex items-center justify-center">
-              {!imgErrorMap[activeCertificate.imageSrc] ? (
-                <Image
-                  src={activeCertificate.imageSrc}
-                  alt={activeCertificate.title}
-                  fill
-                  sizes="(max-width: 768px) 95vw, 768px"
-                  className="object-contain p-2"
-                  onError={() =>
-                    setImgErrorMap((prev) => ({
-                      ...prev,
-                      [activeCertificate.imageSrc]: true,
-                    }))
-                  }
-                />
-              ) : (
-                <div className="p-6 text-center text-zinc-400 space-y-2">
-                  <FileCheck className="w-10 h-10 text-zinc-400 mx-auto" />
-                  <p className="text-xs sm:text-sm font-mono text-zinc-200 font-semibold">
-                    Archivo: {activeCertificate.imageSrc}
-                  </p>
-                  <p className="text-xs text-zinc-500 max-w-sm mx-auto leading-relaxed">
-                    Guarda la imagen de tu certificado en{" "}
-                    <code className="text-zinc-300 font-mono">
-                      public{activeCertificate.imageSrc}
-                    </code>{" "}
-                    para que se visualice aquí.
-                  </p>
-                </div>
-              )}
-            </div>
-
-            {/* Modal Footer */}
-            <div className="flex items-center justify-between pt-2 text-xs font-mono text-zinc-500">
-              <span className="truncate max-w-[200px] sm:max-w-none">{activeCertificate.imageSrc}</span>
-              <button
-                onClick={() => setActiveCertificate(null)}
-                className="px-4 py-2 rounded-xl bg-white text-zinc-950 font-semibold text-xs cursor-pointer hover:bg-zinc-200 transition-colors"
-              >
-                Cerrar
-              </button>
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
+                  <div className="relative w-full h-[52vh] sm:h-[62vh] max-h-[520px] min-h-[220px] rounded-2xl bg-white/80 border border-neutral-200/70 overflow-hidden">
+                    <Image
+                      src={selectedCert.certificateImage}
+                      alt={selectedCert.title}
+                      fill
+                      sizes="(max-width: 768px) 95vw, 900px"
+                      className="object-contain p-2 sm:p-3"
+                    />
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
     </section>
   );
 }

@@ -1,36 +1,30 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Outfit,
+  Plus_Jakarta_Sans,
+  JetBrains_Mono,
+} from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const outfit = Outfit({
+  variable: "--font-display",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-sans",
+  subsets: ["latin"],
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Samuel Bustos Puntis | Ingeniero en Sistemas & Data Scientist",
+  title: "Samuel Bustos Puntis — Ingeniero en Sistemas",
   description:
-    "Portfolio profesional de Samuel Bustos Puntis. Ingeniero en Sistemas de Información especializado en Data Analytics, Data Science, Machine Learning, arquitecturas Cloud en AWS y desarrollo web moderno.",
-  keywords: [
-    "Samuel Bustos Puntis",
-    "Data Scientist",
-    "Data Analyst",
-    "Data Engineer",
-    "Ingeniero en Sistemas",
-    "Python",
-    "SQL",
-    "Machine Learning",
-    "AWS",
-    "Terraform",
-    "Power BI",
-    "Next.js",
-    "React",
-  ],
+    "Portfolio profesional de Samuel Bustos Puntis. Ingeniero en Sistemas de Información especializado en Datos, Producto Digital e Inteligencia Artificial aplicada.",
   authors: [{ name: "Samuel Bustos Puntis" }],
 };
 
@@ -42,9 +36,9 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased dark scroll-smooth`}
+      className={`${outfit.variable} ${plusJakarta.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-[#05070d] text-slate-100 font-sans">
+      <body className="min-h-full flex flex-col bg-[#FAF9F6] text-neutral-900 font-sans">
         {children}
       </body>
     </html>
