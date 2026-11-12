@@ -26,11 +26,6 @@ export const metadata: Metadata = {
   description:
     "Portfolio profesional de Samuel Bustos Puntis. Ingeniero en Sistemas de Información especializado en Datos, Producto Digital e Inteligencia Artificial aplicada.",
   authors: [{ name: "Samuel Bustos Puntis" }],
-  icons: {
-    icon: "/retrato-avatar.png",
-    shortcut: "/retrato-avatar.png",
-    apple: "/retrato-avatar.png",
-  },
 };
 
 export default function RootLayout({
