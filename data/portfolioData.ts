@@ -108,7 +108,7 @@ export const PORTFOLIO_DATA = {
       label: "Criterio",
       title: "IA con propósito real",
       description:
-        "La inteligencia artificial multiplica valor cuando resuelve una necesidad concreta, nunca por moda o capricho.",
+        "La inteligencia artificial genera valor cuando se aplica a resolver necesidades concretas, no cuando se adopta por tendencia o moda.",
     },
   ] as PrincipleItem[],
 

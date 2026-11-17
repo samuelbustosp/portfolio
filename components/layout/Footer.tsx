@@ -57,7 +57,7 @@ export default function Footer() {
             href="https://bps-tech.vercel.app/"
             target="_blank"
             rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/85 backdrop-blur-md border border-neutral-200/85 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.08)] hover:border-blue-500/35 hover:bg-white hover:shadow-[0_10px_28px_-6px_rgba(37,99,235,0.2)] hover:-translate-y-0.5 transition-all duration-300"
+            className="group inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/85 backdrop-blur-md border border-neutral-200/85 shadow-[0_8px_24px_-8px_rgba(0,0,0,0.08)] hover:border-neutral-950/30 hover:bg-white hover:shadow-[0_10px_28px_-6px_rgba(0,0,0,0.22)] hover:-translate-y-0.5 transition-all duration-300"
           >
             <span className="text-xs font-mono text-neutral-500 group-hover:text-neutral-700 transition-colors">
               Desarrollado por
@@ -65,7 +65,7 @@ export default function Footer() {
             <span className="inline-flex items-center gap-1.5 font-display font-bold text-xs tracking-wide text-neutral-950">
               <span>BPS</span>
               <span className="relative inline-flex items-center justify-center">
-                <Zap className="relative w-3.5 h-3.5 text-blue-500 fill-blue-500 drop-shadow-[0_0_6px_rgba(59,130,246,0.85)] group-hover:scale-110 group-hover:drop-shadow-[0_0_10px_rgba(37,99,235,1)] transition-all duration-300" />
+                <Zap className="relative w-3.5 h-3.5 text-neutral-950 fill-neutral-950 drop-shadow-[0_0_5px_rgba(0,0,0,0.3)] group-hover:scale-110 group-hover:drop-shadow-[0_0_8px_rgba(0,0,0,0.5)] transition-all duration-300" />
               </span>
             </span>
           </a>
