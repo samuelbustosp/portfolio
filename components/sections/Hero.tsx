@@ -33,7 +33,7 @@ export default function Hero() {
             >
               <span className="w-2 h-2 rounded-full bg-neutral-950 inline-block" />
               <span className="font-mono text-xs uppercase tracking-widest text-neutral-600">
-                {personal.location} · {personal.focus}
+                {personal.location}
               </span>
             </motion.div>
 
@@ -76,19 +76,19 @@ export default function Hero() {
               className="flex flex-wrap items-center gap-4 pt-2"
             >
               <a
-                href="#projects"
-                className="group inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-neutral-950 text-white text-xs font-mono uppercase tracking-widest hover:bg-neutral-800 hover:scale-[1.02] transition-all shadow-md"
-              >
-                <span>Ver proyectos</span>
-                <ArrowDownRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
-              </a>
-
-              <a
                 href="#contact"
                 className="group inline-flex items-center gap-2.5 px-7 py-4 rounded-full light-glass text-neutral-950 hover:bg-white/90 hover:scale-[1.02] text-xs font-mono uppercase tracking-widest transition-all"
               >
                 <span>Contacto directo</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+
+              <a
+                href="#projects"
+                className="group inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-neutral-950 text-white text-xs font-mono uppercase tracking-widest hover:bg-neutral-800 hover:scale-[1.02] transition-all shadow-md"
+              >
+                <span>Ver proyectos</span>
+                <ArrowDownRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
               </a>
             </motion.div>
           </div>

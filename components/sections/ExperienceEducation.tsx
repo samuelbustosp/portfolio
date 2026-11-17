@@ -149,6 +149,20 @@ export default function ExperienceEducation() {
                     </h4>
                     <p className="text-sm sm:text-base text-neutral-600 leading-relaxed">
                       {cert.detail}
+                      {cert.certifiedBy && (
+                        <>
+                          {" · Certificado por "}
+                          <a
+                            href={cert.certifiedBy.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="font-bold text-neutral-900 hover:text-neutral-950 underline decoration-neutral-300 underline-offset-3 hover:decoration-neutral-950 transition-colors"
+                          >
+                            {cert.certifiedBy.name}
+                          </a>
+                        </>
+                      )}
                     </p>
                   </div>
                 </div>

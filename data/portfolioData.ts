@@ -25,6 +25,10 @@ export interface CertificationItem {
   institution: string;
   date: string;
   detail: string;
+  certifiedBy?: {
+    name: string;
+    url: string;
+  };
   tags: string[];
   certificateImage: string;
 }
@@ -104,7 +108,7 @@ export const PORTFOLIO_DATA = {
       label: "Criterio",
       title: "IA con propósito real",
       description:
-        "La inteligencia artificial multiplica valor cuando resuelve una necesidad concreta, nunca como decoración.",
+        "La inteligencia artificial multiplica valor cuando resuelve una necesidad concreta, nunca por moda o capricho.",
     },
   ] as PrincipleItem[],
 
@@ -178,7 +182,11 @@ export const PORTFOLIO_DATA = {
       title: "Data Science II: Machine Learning",
       institution: "Coderhouse",
       date: "Oct 2026",
-      detail: "Modelos predictivos supervisados y no supervisados · Avalado por Google",
+      detail: "Modelos predictivos supervisados y no supervisados",
+      certifiedBy: {
+        name: "Habi",
+        url: "https://habi.co/",
+      },
       tags: ["Machine Learning", "Scikit-Learn", "Python"],
       certificateImage:
         "/certification/Certificado__Data_Science_II__Machine_Learning_para_la_Ciencia_de_Datos_2026-10-15_page-0001.jpg",
@@ -198,7 +206,11 @@ export const PORTFOLIO_DATA = {
       title: "Data Analytics",
       institution: "Coderhouse",
       date: "Abr 2026",
-      detail: "Modelado de datos, diseño de KPIs y tableros ejecutivos · Avalado por Ualá",
+      detail: "Modelado de datos, diseño de KPIs y tableros ejecutivos",
+      certifiedBy: {
+        name: "Lemon",
+        url: "https://lemon.me/",
+      },
       tags: ["Power BI", "SQL", "KPIs"],
       certificateImage: "/certification/data-analytics.png",
     },
@@ -207,7 +219,11 @@ export const PORTFOLIO_DATA = {
       title: "React JS",
       institution: "Coderhouse",
       date: "Sep 2023",
-      detail: "Desarrollo frontend moderno · Top 10 camada · Avalado por Geopagos",
+      detail: "Desarrollo frontend moderno · Top 10 camada",
+      certifiedBy: {
+        name: "Clara",
+        url: "https://www.clara.com/",
+      },
       tags: ["React", "Frontend", "APIs"],
       certificateImage: "/certification/react-js.png",
     },
